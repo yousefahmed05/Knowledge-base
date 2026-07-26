@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">try{
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#a72429",
+                    "surface": "#fcf9f8",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#e1e2e8",
+                    "on-surface": "#1b1c1c",
+                    "primary": "#850515",
+                    "background": "#fcf9f8",
+                    "surface-variant": "#e5e2e1",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#e1bfbc",
+                    "surface-container-highest": "#e5e2e1",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#f0eded",
+                    "on-surface-variant": "#59413f",
+                    "on-secondary-container": "#626469",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "secondary": "#5c5e63",
+                    "surface-container-low": "#f6f3f2",
+                    "outline": "#8d706e",
+                    "on-background": "#1b1c1c",
+                    "primary-fixed-dim": "#ffb3ae"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "max_width": "1440px",
+                    "gutter": "24px",
+                    "lg": "40px",
+                    "md": "24px",
+                    "base": "4px",
+                    "xs": "8px",
+                    "xl": "64px",
+                    "sm": "16px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "title-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    }catch(_e){}</script>
+    <title>Manage News - Oracle CRM</title>
+</head>
+<body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col">
+<header class="bg-surface border-b border-outline-variant sticky top-0 z-50">
+<div class="flex justify-between items-center px-gutter w-full h-16 max-w-max_width mx-auto">
+<span class="font-headline-md text-headline-md font-bold text-primary">Oracle CRM Knowledge Base</span>
+<div class="flex items-center gap-sm">
+<a href="/admin/news/new" class="bg-primary text-on-primary px-sm py-xs rounded-lg font-title-md hover:bg-primary-container transition-all active:scale-95 flex items-center gap-xs">
+<span class="material-symbols-outlined">add</span>
+New News
+</a>
+<a href="/logout" class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant flex items-center justify-center hover:bg-surface-variant transition-colors" title="Logout">
+<span class="material-symbols-outlined text-secondary">logout</span>
+</a>
+</div>
+</div>
+</header>
+<div class="flex flex-1 max-w-max_width mx-auto w-full">
+<aside class="hidden lg:flex flex-col h-[calc(100vh-64px)] py-md px-sm gap-xs bg-surface-container-low border-r border-outline-variant w-64 sticky top-16">
+<div class="px-sm mb-md">
+<div class="flex items-center gap-sm mb-xs">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary">corporate_fare</span>
+</div>
+<span class="font-title-md text-title-md font-bold text-on-surface">CRM Admin</span>
+</div>
+<p class="font-label-md text-label-md text-secondary opacity-70">Knowledge Management</p>
+</div>
+<nav class="flex-1 flex flex-col gap-xs">
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-lg font-label-md text-label-md transition-all" href="/">
+<span class="material-symbols-outlined">home</span>
+Home
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-lg font-label-md text-label-md transition-all" href="/serviceReq">
+<span class="material-symbols-outlined">history</span>
+Knowledge Base
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-lg font-label-md text-label-md transition-all" href="/admin/services">
+<span class="material-symbols-outlined">dashboard</span>
+Articles
+</a>
+<a class="flex items-center gap-sm px-sm py-base bg-secondary-container text-on-secondary-container rounded-lg font-label-md text-label-md font-semibold transition-all" href="/admin/news">
+<span class="material-symbols-outlined">newspaper</span>
+News
+</a>
+</nav>
+</aside>
+<main class="flex-1 p-gutter max-w-6xl mx-auto w-full">
+<div class="mb-lg">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-sm">News Photos</h1>
+<p class="font-body-md text-body-md text-secondary">Manage scrollable news that appears on the home page</p>
+</div>
+<a href="/admin/news/new" class="bg-primary text-on-primary px-lg py-sm rounded-lg font-title-md hover:bg-primary-container transition-all active:scale-95 flex items-center gap-xs">
+<span class="material-symbols-outlined">add</span>
+Add News
+</a>
+</div>
+</div>
+<% if (newsItems && newsItems.length > 0) { %>
+<div class="bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="text-left px-md py-sm font-title-md text-title-md text-on-surface">Photo</th>
+<th class="text-left px-md py-sm font-title-md text-title-md text-on-surface">Title</th>
+<th class="text-left px-md py-sm font-title-md text-title-md text-on-surface">Order</th>
+<th class="text-left px-md py-sm font-title-md text-title-md text-on-surface">Status</th>
+<th class="text-left px-md py-sm font-title-md text-title-md text-on-surface">Actions</th>
+</tr>
+</thead>
+<tbody>
+<% newsItems.forEach(item => { %>
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+<td class="px-md py-sm">
+<img src="<%= item.imageUrl %>" alt="<%= item.title %>" class="w-20 h-14 object-cover rounded-lg border border-outline-variant">
+</td>
+<td class="px-md py-sm font-body-md text-body-md text-on-surface font-semibold"><%= item.title %></td>
+<td class="px-md py-sm font-body-md text-body-md text-secondary"><%= item.order %></td>
+<td class="px-md py-sm">
+<% if (item.active) { %>
+<span class="inline-flex px-sm py-xs rounded-lg bg-green-100 text-green-800 font-label-md text-label-md">Active</span>
+<% } else { %>
+<span class="inline-flex px-sm py-xs rounded-lg bg-surface-variant text-secondary font-label-md text-label-md">Hidden</span>
+<% } %>
+</td>
+<td class="px-md py-sm">
+<div class="flex items-center gap-xs">
+<a href="/admin/news/<%= item._id %>/edit" class="flex items-center gap-xs px-sm py-xs rounded-lg font-label-md text-label-md text-primary hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+Edit
+</a>
+<form method="POST" action="/admin/news/<%= item._id %>/delete" style="display: inline;" onsubmit="return confirm('Delete this news item?');">
+<button type="submit" class="flex items-center gap-xs px-sm py-xs rounded-lg font-label-md text-label-md text-error hover:bg-error-container transition-all">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+Delete
+</button>
+</form>
+</div>
+</td>
+</tr>
+<% }); %>
+</tbody>
+</table>
+</div>
+</div>
+<% } else { %>
+<div class="text-center py-xl">
+<span class="material-symbols-outlined text-[64px] text-secondary mx-auto mb-md opacity-50">newspaper</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm">No news yet</h3>
+<p class="font-body-md text-body-md text-secondary mb-lg">Add your first news photo to show it on the home page.</p>
+<a href="/admin/news/new" class="inline-flex items-center gap-xs bg-primary text-on-primary px-lg py-sm rounded-lg font-title-md hover:bg-primary-container transition-all">
+<span class="material-symbols-outlined">add</span>
+Add News
+</a>
+</div>
+<% } %>
+</main>
+</div>
+<footer class="bg-surface border-t border-outline-variant mt-auto">
+<div class="flex justify-between items-center py-lg px-gutter w-full max-w-max_width mx-auto">
+<span class="font-label-md text-label-md text-secondary">© <%= currentYear %> Oracle CRM Knowledge Base. Internal Use Only.</span>
+</div>
+</footer>
+</body>
+</html>

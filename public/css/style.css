@@ -1,0 +1,343 @@
+/* ==========================================================================
+   1. GLOBAL SYSTEM RESETS
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #111111;
+}
+
+/* ==========================================================================
+   2. CORE WORKSPACE LAYOUT (THE RESTRICTURED TRACK)
+   ========================================================================== */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Sidebar: Stark Black and White on the left */
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    background-color: #a72429;
+    color: #ffffffff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0; 
+    border-right: 5px solid #000000;
+    position: sticky;
+    top: 0;
+}
+
+/* Right side master panel that houses search at the top, content below */
+.workspace {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    align-items: flex-start;
+    width: 100%;
+    padding-left: 30px;
+}
+/* Global Header Area spanning edge-to-edge at the absolute top */
+.global-header {
+    width: 100%;
+    padding: 25px 40px 25px 4px; 
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #ffffff;
+    display: flex;
+}
+/* Content Body containing your actual page text, underneath the header */
+.content-body {
+    width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+}
+/* ==========================================================================
+   3. SIDEBAR COMPONENT ELEMENTS
+   ========================================================================== */
+.sidebar h2 {
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s, padding-left 0.2s;
+}
+
+.sidebar ul li a:hover {
+    color: #ffffff59;
+    padding-left: 4px;
+}
+
+.chat-shortcut {
+    background-color: #111111;
+    border: 1px solid #333333;
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   4. CONTENT & REUSABLE TYPOGRAPHY ELEMENTS
+   ========================================================================== */
+.content-body h1 {
+    margin-bottom: 20px;
+    color: #000000;
+    font-weight: 800;
+    font-size: 2rem;
+}
+
+.card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #e5e5e5;
+    margin-top: 30px;
+    border-left: 4px solid #a72429; /* Crimson Red structural brand border */
+}
+
+.card h3 {
+    color: #a72429; /* Crimson Red Card Headings */
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.card p {
+    color: #333333;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.content-block {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.content-block h3 {
+    font-size: 1.3rem;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.styled-list {
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+.styled-list li {
+    margin-bottom: 10px;
+    color: #333333;
+}
+
+code {
+    background-color: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    color: #a72429; /* Crimson Red text badges */
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   5. SEARCH INTERACTIVE COMPONENTS
+   ========================================================================== */
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    color: #888888;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 12px 12px 12px 40px;
+    font-size: 0.95rem;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #111111;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-container input:focus {
+    outline: none;
+    border-color: #a72429;
+    box-shadow: 0 0 0 3px rgba(167, 36, 41, 0.1);
+}
+
+.search-results-dropdown {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    display: none;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.search-item {
+    display: block;
+    padding: 12px 16px;
+    color: #333333;
+    text-decoration: none;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #f4f4f4;
+    transition: background-color 0.2s;
+}
+
+.search-item:last-child {
+    border-bottom: none;
+}
+
+.search-item:hover {
+    background-color: #f9f9f9;
+    color: #a72429;
+}
+
+.search-no-results {
+    padding: 12px 16px;
+    color: #888888;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+/* ==========================================================================
+   6. SERVICE REQUESTS TABLE
+   ========================================================================== */
+.service-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.service-table thead {
+    background-color: #f9f9f9;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+.service-table th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #000000;
+    font-size: 0.95rem;
+}
+
+.service-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #333333;
+    font-size: 0.95rem;
+}
+
+.service-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.service-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ==========================================================================
+   7. MODAL FOR DETAILS
+   ========================================================================== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 10% auto;
+    padding: 30px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: #a72429;
+}
+
+.modal-content h2 {
+    color: #a72429;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.modal-details {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e5e5;
+    color: #333333;
+    line-height: 1.6;
+}
+
+.clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.clickable-row:hover {
+    background-color: #f0f0f0;
+}

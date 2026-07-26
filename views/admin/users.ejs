@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users - Admin Panel</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
+        }
+        .admin-header {
+            background: white;
+            padding: 20px 40px;
+            border-bottom: 1px solid #e5e5e5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .admin-header h1 {
+            margin: 0;
+            color: #000000;
+            font-size: 1.5rem;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .user-badge {
+            background-color: #a72429;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .logout-btn {
+            padding: 10px 20px;
+            background-color: #333333;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .logout-btn:hover {
+            background-color: #000000;
+        }
+        .admin-content {
+            flex: 1;
+            padding: 40px;
+            background-color: #f9f9f9;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #a72429;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .users-table-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #a72429;
+        }
+        .users-table-container h2 {
+            color: #a72429;
+            margin-bottom: 20px;
+        }
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .users-table thead {
+            background-color: #f0f0f0;
+            border-bottom: 2px solid #e5e5e5;
+        }
+        .users-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #333333;
+            font-size: 0.95rem;
+        }
+        .users-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e5e5e5;
+            color: #666666;
+            font-size: 0.95rem;
+        }
+        .users-table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+        .role-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .role-admin {
+            background-color: #a72429;
+            color: white;
+        }
+        .role-user {
+            background-color: #e5e5e5;
+            color: #333333;
+        }
+        .date-cell {
+            color: #999999;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div style="flex: 1;">
+            <div class="admin-header">
+                <h1>⚙️ Admin Panel</h1>
+                <div class="user-info">
+                    <span><%= user.email %></span>
+                    <span class="user-badge">Admin</span>
+                    <a href="/logout" class="logout-btn">Log Out</a>
+                </div>
+            </div>
+
+            <div class="admin-content">
+                <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+
+                <div class="users-table-container">
+                    <h2>👥 Registered Users</h2>
+                    
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Joined</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% users.forEach(user => { %>
+                                <tr>
+                                    <td><%= user.email %></td>
+                                    <td>
+                                        <span class="role-badge <%= user.role === 'admin' ? 'role-admin' : 'role-user' %>">
+                                            <%= user.role %>
+                                        </span>
+                                    </td>
+                                    <td class="date-cell"><%= user.createdAt.toLocaleDateString() %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+
+                    <p style="margin-top: 20px; color: #666666;">
+                        <strong>Total Users:</strong> <%= users.length %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

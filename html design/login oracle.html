@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="en" class="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#e1e2e4",
+                    "primary-fixed-dim": "#ffb3ae",
+                    "on-background": "#1b1c1c",
+                    "outline": "#8d706e",
+                    "on-tertiary-fixed-variant": "#444749",
+                    "secondary-fixed-dim": "#c5c6cc",
+                    "secondary": "#5c5e63",
+                    "primary-container": "#a72429",
+                    "surface": "#fcf9f8",
+                    "tertiary-container": "#55585a",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#e1e2e8",
+                    "on-surface": "#1b1c1c",
+                    "secondary-fixed": "#e1e2e8",
+                    "on-primary-fixed-variant": "#8f0f1a",
+                    "primary": "#850515",
+                    "surface-dim": "#dcd9d9",
+                    "background": "#fcf9f8",
+                    "surface-variant": "#e5e2e1",
+                    "on-primary-container": "#ffbeba",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f3f0ef",
+                    "outline-variant": "#e1bfbc",
+                    "surface-tint": "#b12b2f",
+                    "surface-container-highest": "#e5e2e1",
+                    "surface-container-high": "#eae7e7",
+                    "primary-fixed": "#ffdad7",
+                    "inverse-surface": "#303030",
+                    "on-tertiary-container": "#cdced0",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#f0eded",
+                    "on-secondary-fixed": "#191c20",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#59413f",
+                    "on-primary-fixed": "#410005",
+                    "on-secondary-fixed-variant": "#45474c",
+                    "on-secondary-container": "#626469",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#ffb3ae",
+                    "surface-bright": "#fcf9f8",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#3e4142",
+                    "on-tertiary-fixed": "#191c1e",
+                    "surface-container-low": "#f6f3f2",
+                    "tertiary-fixed-dim": "#c5c7c8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "1rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "max_width": "1440px",
+                    "gutter": "24px",
+                    "lg": "40px",
+                    "md": "24px",
+                    "margin": "32px",
+                    "base": "4px",
+                    "xs": "8px",
+                    "xl": "64px",
+                    "sm": "16px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "title-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    }catch(_e){}</script><meta charset="utf-8"></head><body class="min-h-screen flex items-center justify-center p-gutter">
+<!-- Background Decoration (Optional) -->
+<div class="fixed inset-0 overflow-hidden -z-10 opacity-40">
+
+</div>
+<!-- Main Container -->
+<main class="w-full max-w-md">
+<!-- Logo Section -->
+<div class="flex flex-col items-center mb-lg">
+<div class="mb-sm">
+<!-- Using a styled representation for the Oracle Logo -->
+<div class="flex items-center gap-xs">
+<span class="font-display-lg text-display-lg text-primary tracking-tighter uppercase">Oracle</span>
+<span class="font-title-lg text-title-lg text-secondary pt-base">CRM</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-secondary">Knowledge Management System</p>
+</div>
+<!-- Login Card -->
+<div class="login-card bg-surface-container-lowest border border-outline-variant rounded-2xl p-lg">
+<h1 class="font-headline-md text-headline-md text-on-surface mb-xl text-center">Sign In</h1>
+<form class="space-y-md" id="loginForm">
+<!-- Role Selection -->
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-secondary uppercase tracking-wider block">Access Role</label>
+<div class="flex gap-sm">
+<button class="role-chip flex-1 py-xs border border-outline rounded-lg font-title-md text-title-md text-on-surface hover:bg-surface-variant" id="role-admin" onclick="selectRole('admin')" type="button">
+                            Admin
+                        </button>
+<button class="role-chip active flex-1 py-xs border border-outline rounded-lg font-title-md text-title-md text-on-surface hover:bg-surface-variant" id="role-user" onclick="selectRole('user')" type="button">
+                            User
+                        </button>
+</div>
+</div>
+<!-- Identity Field -->
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-secondary uppercase tracking-wider block" for="identity">Employee ID / Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-secondary">person</span>
+<input class="w-full pl-xl pr-sm py-sm rounded-lg border border-outline-variant bg-surface-container focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all font-body-md text-body-md" id="identity" name="identity" placeholder="e.g. 100452 or user@oracle.com" required="" type="text">
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-xs">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md text-secondary uppercase tracking-wider" for="password">Password</label>
+<a class="font-label-md text-label-md text-primary hover:underline" href="#">Forgot?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-secondary">lock</span>
+<input class="w-full pl-xl pr-sm py-sm rounded-lg border border-outline-variant bg-surface-container focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all font-body-md text-body-md" id="password" name="password" placeholder="••••••••" required="" type="password">
+</div>
+</div>
+<!-- Action Button -->
+<div class="pt-sm">
+<button class="btn-primary w-full py-sm rounded-lg text-white font-title-md text-title-md shadow-lg flex items-center justify-center gap-xs" type="submit">
+                        Enter Workspace
+                        <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</form>
+<div class="mt-xl pt-md border-t border-outline-variant text-center">
+<p class="font-body-md text-body-md text-secondary">
+                    Need technical assistance? 
+                    <a class="text-primary font-semibold hover:underline" href="#">Contact Support</a>
+</p>
+</div>
+</div>
+<!-- Footer Info -->
+<footer class="mt-xl text-center space-y-xs opacity-60">
+<p class="font-label-md text-label-md text-on-surface-variant">© 2024 Oracle CRM Knowledge Base. Internal Use Only.</p>
+<div class="flex justify-center gap-md">
+<a class="font-label-md text-label-md text-secondary hover:text-primary underline" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-secondary hover:text-primary underline" href="#">Security</a>
+</div>
+</footer>
+</main>
+<script>
+        let currentRole = 'user';
+
+        function selectRole(role) {
+            currentRole = role;
+            const adminBtn = document.getElementById('role-admin');
+            const userBtn = document.getElementById('role-user');
+            
+            if (role === 'admin') {
+                adminBtn.classList.add('active');
+                userBtn.classList.remove('active');
+            } else {
+                userBtn.classList.add('active');
+                adminBtn.classList.remove('active');
+            }
+            
+            // Subtle visual feedback
+            console.log("Selected access level: " + role);
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            
+            // Loading state simulation
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Authenticating...';
+            
+            setTimeout(() => {
+                alert(`Authenticated as ${currentRole.toUpperCase()}. Redirecting to workspace...`);
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+            }, 1200);
+        });
+    </script>
+</body></html>

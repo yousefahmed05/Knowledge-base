@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">try{
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#a72429",
+                    "surface": "#fcf9f8",
+                    "secondary-container": "#e1e2e8",
+                    "on-surface": "#1b1c1c",
+                    "primary": "#850515",
+                    "background": "#fcf9f8",
+                    "surface-variant": "#e5e2e1",
+                    "outline-variant": "#e1bfbc",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#59413f",
+                    "on-secondary-container": "#626469",
+                    "on-primary": "#ffffff",
+                    "secondary": "#5c5e63",
+                    "surface-container-low": "#f6f3f2",
+                    "outline": "#8d706e",
+                    "primary-fixed-dim": "#ffb3ae"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "max_width": "1440px",
+                    "gutter": "24px",
+                    "lg": "40px",
+                    "md": "24px",
+                    "base": "4px",
+                    "xs": "8px",
+                    "xl": "64px",
+                    "sm": "16px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "title-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "title-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    }catch(_e){}</script>
+    <title><%= newsItem ? 'Edit' : 'Create' %> News - Oracle CRM</title>
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@7.6.1/tinymce.min.js" referrerpolicy="origin"></script>
+    <style>
+      .tox-tinymce { border-radius: 0.5rem !important; border-color: #8d706e !important; }
+    </style>
+</head>
+<body class="bg-[#F5F6F8] text-on-surface font-body-lg min-h-screen flex flex-col">
+<header class="bg-surface border-b border-outline-variant sticky top-0 z-50">
+<div class="flex justify-between items-center px-gutter w-full h-16 max-w-max_width mx-auto">
+<span class="font-headline-md text-headline-md font-bold text-primary">Oracle CRM Knowledge Base</span>
+<div class="flex items-center gap-sm">
+<a href="/admin/news" class="bg-primary text-on-primary px-sm py-xs rounded-lg font-title-md hover:bg-primary-container transition-all active:scale-95">Back</a>
+<a href="/logout" class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant flex items-center justify-center hover:bg-surface-variant transition-colors" title="Logout">
+<span class="material-symbols-outlined text-secondary">logout</span>
+</a>
+</div>
+</div>
+</header>
+<div class="flex flex-1 max-w-max_width mx-auto w-full">
+<aside class="hidden md:flex flex-col h-[calc(100vh-64px)] py-md px-sm gap-xs bg-surface-container-low border-r border-outline-variant w-64 sticky top-16">
+<div class="mb-lg px-2">
+<h2 class="font-title-md text-title-md font-bold text-on-surface">CRM Admin</h2>
+<p class="font-label-md text-label-md text-secondary">Knowledge Management</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-sm px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all" href="/">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all" href="/admin/services">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Articles</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-2 rounded-lg bg-secondary-container text-on-secondary-container font-semibold transition-all" href="/admin/news">
+<span class="material-symbols-outlined">newspaper</span>
+<span class="font-label-md text-label-md">News</span>
+</a>
+</nav>
+</aside>
+<main class="flex-1 p-gutter max-w-4xl mx-auto w-full">
+<header class="mb-lg">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2"><%= newsItem ? 'Edit News' : 'Create News' %></h1>
+<p class="font-body-md text-body-md text-secondary">Upload a photo and write the news text. It will appear in the home page scroller.</p>
+</header>
+<form class="space-y-md" method="POST" action="<%= newsItem ? '/admin/news/' + newsItem._id + '/edit' : '/admin/news' %>" enctype="multipart/form-data">
+<section class="bg-surface-container-lowest p-md rounded-[12px] border border-outline-variant space-y-md">
+<div>
+<label class="block font-title-md text-title-md text-secondary mb-xs" for="title">Title</label>
+<textarea class="w-full px-sm py-sm rounded-lg border border-outline bg-[#F5F6F8] focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none" id="title" name="title" rows="2" placeholder="e.g. New CRM update" required><%= newsItem ? newsItem.title : '' %></textarea>
+</div>
+<div>
+<label class="block font-title-md text-title-md text-secondary mb-xs" for="content">News Text</label>
+<textarea class="w-full px-sm py-sm rounded-lg border border-outline bg-[#F5F6F8] focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none" id="content" name="content" rows="6" placeholder="Write the full news content here..." required><%= newsItem ? newsItem.content : '' %></textarea>
+</div>
+<div>
+<label class="block font-title-md text-title-md text-secondary mb-xs" for="image">Photo <%= newsItem ? '(leave empty to keep current)' : '' %></label>
+<input class="w-full rounded-lg border border-outline bg-[#F5F6F8] px-sm py-sm" id="image" name="image" type="file" accept="image/jpeg,image/png,image/gif,image/webp" <%= newsItem ? '' : 'required' %>>
+<% if (newsItem && newsItem.imageUrl) { %>
+<div class="mt-sm">
+<p class="font-label-md text-label-md text-secondary mb-xs">Current photo:</p>
+<img src="<%= newsItem.imageUrl %>" alt="<%= newsItem.title %>" class="max-h-48 rounded-lg border border-outline-variant object-cover">
+</div>
+<% } %>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div>
+<label class="block font-title-md text-title-md text-secondary mb-xs" for="order">Display Order</label>
+<input class="w-full h-12 px-sm rounded-lg border border-outline bg-[#F5F6F8] focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none" id="order" name="order" type="number" value="<%= newsItem ? newsItem.order : 0 %>">
+</div>
+<div class="flex items-end pb-2">
+<label class="inline-flex items-center gap-sm cursor-pointer">
+<input type="checkbox" name="active" id="active" class="rounded border-outline text-primary focus:ring-primary" <%= !newsItem || newsItem.active ? 'checked' : '' %>>
+<span class="font-title-md text-title-md text-on-surface">Show on home page</span>
+</label>
+</div>
+</div>
+</section>
+<div class="flex justify-end gap-sm pt-md">
+<a class="px-xl py-xs rounded-lg border border-outline font-title-md text-secondary hover:bg-surface-variant transition-all" href="/admin/news">Cancel</a>
+<button class="px-xl py-xs rounded-lg bg-[#850515] text-white font-title-md hover:opacity-90 shadow-lg active:scale-95 transition-all" type="submit"><%= newsItem ? 'Update News' : 'Create News' %></button>
+</div>
+</form>
+</main>
+</div>
+<script>
+  if (window.tinymce) {
+    // Initialize title editor - plain text, no complex blocks
+    tinymce.init({
+      selector: '#title',
+      base_url: 'https://cdn.jsdelivr.net/npm/tinymce@7.6.1',
+      suffix: '.min',
+      height: 160,
+      menubar: 'edit view format',
+      branding: false,
+      promotion: false,
+      convert_urls: false,
+      plugins: 'lists link charmap code',
+      toolbar: 'undo redo | formatselect fontfamily fontsize | bold italic underline strikethrough subscript superscript | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link code removeformat',
+      font_family_formats: 'Arial=arial,helvetica,sans-serif; Times New Roman=times new roman,times,serif; Georgia=georgia,palatino,serif; Courier New=courier new,courier,monospace; Verdana=verdana,geneva,sans-serif; Tahoma=tahoma,arial,helvetica,sans-serif; Comic Sans MS=comic sans ms,sans-serif',
+      font_size_formats: '8px 10px 12px 14px 16px 18px 20px 24px 30px 36px 42px 48px',
+      block_formats: 'Paragraph=p',
+      content_style: 'body { font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5; }',
+      setup(editor) {
+        editor.on('change keyup undo redo SetContent', () => editor.save());
+      }
+    });
+
+    // Initialize content editor
+    tinymce.init({
+      selector: '#content',
+      base_url: 'https://cdn.jsdelivr.net/npm/tinymce@7.6.1',
+      suffix: '.min',
+      height: 280,
+      menubar: 'edit view insert format',
+      branding: false,
+      promotion: false,
+      convert_urls: false,
+      plugins: 'lists link table wordcount charmap code image',
+      toolbar: 'undo redo | formatselect fontfamily fontsize | bold italic underline strikethrough subscript superscript | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image code removeformat',
+      images_upload_url: '/admin/news/upload-image',
+      automatic_uploads: true,
+      file_picker_types: 'image',
+      font_family_formats: 'Arial=arial,helvetica,sans-serif; Times New Roman=times new roman,times,serif; Georgia=georgia,palatino,serif; Courier New=courier new,courier,monospace; Verdana=verdana,geneva,sans-serif; Tahoma=tahoma,arial,helvetica,sans-serif; Comic Sans MS=comic sans ms,sans-serif',
+      font_size_formats: '8px 10px 12px 14px 16px 18px 20px 24px 30px 36px 42px 48px',
+      block_formats: 'Paragraph=p; Heading 1=h1; Heading 2=h2; Heading 3=h3; Heading 4=h4; Heading 5=h5; Heading 6=h6; Preformatted=pre',
+      content_style: 'body { font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5; } h1 { font-size: 32px; font-weight: bold; margin: 0.5em 0; } h2 { font-size: 28px; font-weight: bold; margin: 0.5em 0; } h3 { font-size: 24px; font-weight: bold; margin: 0.5em 0; }',
+      setup(editor) {
+        editor.on('change keyup undo redo SetContent', () => editor.save());
+      }
+    });
+  }
+
+  document.querySelector('form')?.addEventListener('submit', () => {
+    if (window.tinymce) tinymce.triggerSave();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Denied - CRM</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .error-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f9f9f9;
+        }
+        .error-card {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            text-align: center;
+            border-left: 4px solid #a72429;
+        }
+        .error-card h1 {
+            color: #a72429;
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+        .error-card p {
+            color: #666666;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .error-card a {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #a72429;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .error-card a:hover {
+            background-color: #8b1d22;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-card">
+            <h1>🔒 Access Denied</h1>
+            <p>You do not have permission to access this resource. Only administrators can view this page.</p>
+            <a href="/dashboard">← Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">try{
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#e1e2e4",
+                        "primary-fixed-dim": "#ffb3ae",
+                        "on-background": "#1b1c1c",
+                        "outline": "#8d706e",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "secondary-fixed-dim": "#c5c6cc",
+                        "secondary": "#5c5e63",
+                        "primary-container": "#a72429",
+                        "surface": "#fcf9f8",
+                        "tertiary-container": "#55585a",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#e1e2e8",
+                        "on-surface": "#1b1c1c",
+                        "secondary-fixed": "#e1e2e8",
+                        "on-primary-fixed-variant": "#8f0f1a",
+                        "primary": "#850515",
+                        "surface-dim": "#dcd9d9",
+                        "background": "#fcf9f8",
+                        "surface-variant": "#e5e2e1",
+                        "on-primary-container": "#ffbeba",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f3f0ef",
+                        "outline-variant": "#e1bfbc",
+                        "surface-tint": "#b12b2f",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-container-high": "#eae7e7",
+                        "primary-fixed": "#ffdad7",
+                        "inverse-surface": "#303030",
+                        "on-tertiary-container": "#cdced0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f0eded",
+                        "on-secondary-fixed": "#191c20",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#59413f",
+                        "on-primary-fixed": "#410005",
+                        "on-secondary-fixed-variant": "#45474c",
+                        "on-secondary-container": "#626469",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#ffb3ae",
+                        "surface-bright": "#fcf9f8",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#3e4142",
+                        "on-tertiary-fixed": "#191c1e",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary-fixed-dim": "#c5c7c8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "max_width": "1440px",
+                        "gutter": "24px",
+                        "lg": "40px",
+                        "md": "24px",
+                        "margin": "32px",
+                        "base": "4px",
+                        "xs": "8px",
+                        "xl": "64px",
+                        "sm": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    }catch(_e){}</script>
+    <title><%= title || 'Article' %> - Oracle CRM</title>
+    <style>
+      .rich-content { overflow-wrap: anywhere; word-break: break-word; max-width: 100%; }
+      .rich-content img { max-width: 100%; height: auto; }
+      .rich-content p { margin: 0 0 0.75em; }
+      .rich-content p:last-child { margin-bottom: 0; }
+      .rich-content ul, .rich-content ol { margin: 0 0 0.75em; padding-left: 1.5em; }
+      .rich-content li { margin-bottom: 0.25em; }
+      .rich-content a { color: #850515; text-decoration: underline; }
+      .rich-content table { border-collapse: collapse; width: 100%; margin-bottom: 0.75em; table-layout: fixed; }
+      .rich-content td, .rich-content th { border: 1px solid #e1bfbc; padding: 0.4em 0.6em; word-break: break-word; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col overflow-x-hidden">
+<header class="bg-surface dark:bg-surface-container border-b border-outline-variant dark:border-outline sticky top-0 z-50">
+<div class="flex justify-between items-center px-gutter w-full h-16 max-w-max_width mx-auto">
+<div class="flex items-center gap-md">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim cursor-pointer active:scale-95 transition-transform">
+                    Oracle CRM Knowledge Base
+                </div>
+</div>
+<div class="flex items-center gap-sm">
+<a href="/logout" class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant flex items-center justify-center hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-secondary">logout</span>
+</a>
+</div>
+</div>
+</header>
+<div class="flex flex-1 max-w-max_width mx-auto w-full">
+<aside class="hidden lg:flex flex-col h-[calc(100vh-4rem)] sticky top-16 py-md px-sm gap-xs bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline w-64 shrink-0">
+<div class="mb-md px-sm">
+<p class="font-title-md text-title-md font-bold text-on-surface">CRM Admin</p>
+<p class="font-label-md text-label-md text-secondary">Knowledge Management</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-sm px-sm py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="/">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-2 bg-secondary-container text-on-secondary-container rounded-lg font-semibold transition-all duration-200 ease-in-out" href="/serviceReq">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">Knowledge Base</span>
+</a>
+<% if (user && user.role === 'admin') { %>
+<a class="flex items-center gap-sm px-sm py-2 text-on-surface-variant rounded-lg hover:bg-surface-variant transition-all duration-200 ease-in-out" href="/admin/services">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">My Articles</span>
+</a>
+<% } %>
+</nav>
+</aside>
+<main class="flex-1 px-gutter py-xl max-w-4xl mx-auto w-full min-w-0 overflow-hidden">
+<a href="/" id="article-back-link" class="inline-flex items-center gap-xs text-primary mb-lg font-semibold">&larr; Back</a>
+<article class="bg-surface border border-outline-variant rounded-xl p-lg shadow-sm min-w-0 overflow-hidden">
+<div class="mb-md">
+<span class="inline-block px-sm py-xs bg-primary-fixed text-on-primary-fixed-variant rounded-full font-label-md text-label-md">
+<%= service.category && service.category.name ? service.category.name : 'Article' %>
+</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-sm break-words" style="overflow-wrap: anywhere; word-break: break-word;"><%= service.name %></h1>
+<div class="mb-lg min-w-0">
+<h2 class="font-title-md text-title-md text-on-surface mb-xs">Description</h2>
+<% const descriptionHtml = service.description || ''; %>
+<% if (descriptionHtml && isRichHtml(descriptionHtml)) { %>
+<div class="font-body-md text-body-md text-secondary rich-content"><%- descriptionHtml %></div>
+<% } else { %>
+<p class="font-body-md text-body-md text-secondary break-words" style="overflow-wrap: anywhere; word-break: break-word; white-space: pre-wrap;">
+<%= descriptionHtml || service.details || 'No description provided yet.' %>
+</p>
+<% } %>
+</div>
+<div class="min-w-0 space-y-lg">
+<h2 class="font-title-md text-title-md text-on-surface">Detailed Content</h2>
+<%
+    const articleBody = getArticleBody(service);
+    const showBulk = articleBody.layout === 'bulk' || articleBody.layout === 'both';
+    const showSteps = articleBody.layout === 'steps' || articleBody.layout === 'both';
+    const hasBulk = showBulk && articleBody.bulkContent && String(articleBody.bulkContent).trim();
+    const hasSteps = showSteps && articleBody.steps.length > 0;
+%>
+
+<% if (!hasBulk && !hasSteps) { %>
+<p class="font-body-md text-body-md text-secondary">No detailed content yet.</p>
+<% } %>
+
+<% if (hasBulk) { %>
+<section class="min-w-0 rounded-xl border border-outline-variant bg-surface-container-low p-md overflow-hidden">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">article</span>
+<h3 class="font-title-md text-title-md text-on-surface">Overview</h3>
+</div>
+<% if (isRichHtml(articleBody.bulkContent)) { %>
+<div class="font-body-md text-body-md text-on-surface leading-7 rich-content min-w-0"><%- articleBody.bulkContent %></div>
+<% } else { %>
+<div class="font-body-md text-body-md text-on-surface leading-7 break-words min-w-0" style="overflow-wrap: anywhere; word-break: break-word; white-space: pre-wrap;"><%= articleBody.bulkContent %></div>
+<% } %>
+</section>
+<% } %>
+
+<% if (hasSteps) { %>
+<section class="min-w-0 <%= hasBulk ? 'pt-sm border-t border-outline-variant' : '' %>">
+<% if (hasBulk) { %>
+<div class="flex items-center gap-xs mb-sm mt-md">
+<span class="material-symbols-outlined text-primary text-[20px]">format_list_numbered</span>
+<h3 class="font-title-md text-title-md text-on-surface">Steps</h3>
+</div>
+<% } %>
+<div class="font-body-md text-body-md text-on-surface leading-7 space-y-sm min-w-0">
+<% articleBody.steps.forEach((step) => { %>
+<div class="flex gap-sm min-w-0 rounded-xl border border-outline-variant bg-surface p-sm">
+<span class="font-semibold text-primary shrink-0 w-7 h-7 rounded-full bg-primary-fixed flex items-center justify-center text-sm"><%= step.number %></span>
+<div class="flex-1 min-w-0 space-y-1 overflow-hidden">
+<% if (step.department) { %>
+<div class="font-semibold text-secondary break-words" style="overflow-wrap: anywhere; word-break: break-word; white-space: pre-wrap;">Department: <%= step.department %></div>
+<% } %>
+<% if (step.content) { %>
+<% if (isRichHtml(step.content)) { %>
+<div class="rich-content min-w-0"><%- step.content %></div>
+<% } else { %>
+<div class="break-words min-w-0" style="overflow-wrap: anywhere; word-break: break-word; white-space: pre-wrap;"><%= step.content %></div>
+<% } %>
+<% } %>
+</div>
+</div>
+<% }); %>
+</div>
+</section>
+<% } %>
+</div>
+</article>
+</main>
+</div>
+<script>
+(function () {
+  const backLink = document.getElementById('article-back-link');
+  if (!backLink) return;
+
+  const sameOriginReferrer = (() => {
+    try {
+      if (!document.referrer) return null;
+      const ref = new URL(document.referrer);
+      if (ref.origin !== window.location.origin) return null;
+      if (ref.pathname === window.location.pathname) return null;
+      return document.referrer;
+    } catch (_err) {
+      return null;
+    }
+  })();
+
+  if (sameOriginReferrer) {
+    backLink.href = sameOriginReferrer;
+  }
+
+  backLink.addEventListener('click', (event) => {
+    if (window.history.length > 1 && sameOriginReferrer) {
+      event.preventDefault();
+      window.history.back();
+    }
+  });
+})();
+</script>
+</body>
+</html>

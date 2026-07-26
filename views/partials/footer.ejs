@@ -1,0 +1,34 @@
+<%
+    const brandName = typeof siteName !== 'undefined' ? siteName : 'GlobalTours';
+    const year = typeof currentYear !== 'undefined' ? currentYear : new Date().getFullYear();
+%>
+    <footer class="kb-footer">
+        <div class="kb-footer__inner">
+            <div class="kb-footer__copy">
+                <span class="kb-footer__brand">&copy; <%= year %> <%= brandName %></span>
+                <span class="kb-footer__note">Internal Use Only.</span>
+            </div>
+
+            <div class="kb-footer__links">
+                <span>Privacy Policy</span>
+                <span>Terms of Service</span>
+                <span>Security</span>
+                <span>Feedback</span>
+            </div>
+
+            <div class="kb-footer__status">
+                <div>
+                    <span class="kb-footer__status-label">System Status</span>
+                    <span class="kb-footer__status-value">
+                        <span class="kb-footer__status-dot" aria-hidden="true"></span>
+                        Operational
+                    </span>
+                </div>
+                <div class="kb-footer__status-icon" aria-hidden="true">
+                    <i class="fa-solid fa-cloud-check"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

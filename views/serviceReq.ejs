@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">try{
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#e1e2e4",
+                        "primary-fixed-dim": "#ffb3ae",
+                        "on-background": "#1b1c1c",
+                        "outline": "#8d706e",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "secondary-fixed-dim": "#c5c6cc",
+                        "secondary": "#5c5e63",
+                        "primary-container": "#a72429",
+                        "surface": "#fcf9f8",
+                        "tertiary-container": "#55585a",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#e1e2e8",
+                        "on-surface": "#1b1c1c",
+                        "secondary-fixed": "#e1e2e8",
+                        "on-primary-fixed-variant": "#8f0f1a",
+                        "primary": "#850515",
+                        "surface-dim": "#dcd9d9",
+                        "background": "#fcf9f8",
+                        "surface-variant": "#e5e2e1",
+                        "on-primary-container": "#ffbeba",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f3f0ef",
+                        "outline-variant": "#e1bfbc",
+                        "surface-tint": "#b12b2f",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-container-high": "#eae7e7",
+                        "primary-fixed": "#ffdad7",
+                        "inverse-surface": "#303030",
+                        "on-tertiary-container": "#cdced0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f0eded",
+                        "on-secondary-fixed": "#191c20",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#59413f",
+                        "on-primary-fixed": "#410005",
+                        "on-secondary-fixed-variant": "#45474c",
+                        "on-secondary-container": "#626469",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#ffb3ae",
+                        "surface-bright": "#fcf9f8",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#3e4142",
+                        "on-tertiary-fixed": "#191c1e",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary-fixed-dim": "#c5c7c8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "max_width": "1440px",
+                        "gutter": "24px",
+                        "lg": "40px",
+                        "md": "24px",
+                        "margin": "32px",
+                        "base": "4px",
+                        "xs": "8px",
+                        "xl": "64px",
+                        "sm": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    }catch(_e){}</script>
+    <title><%= title || 'Knowledge Base' %> - Oracle CRM</title>
+</head>
+<body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col overflow-x-hidden">
+<!-- TopNavBar Shell -->
+<header class="bg-surface dark:bg-surface-container border-b border-outline-variant dark:border-outline sticky top-0 z-50">
+<div class="flex justify-between items-center px-gutter w-full h-16 max-w-max_width mx-auto">
+<div class="flex items-center gap-md">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim cursor-pointer active:scale-95 transition-transform">
+                    Oracle CRM Knowledge Base
+                </div>
+<nav class="hidden md:flex gap-sm items-center ml-lg">
+</nav>
+</div>
+<div class="flex items-center gap-sm">
+<div class="hidden sm:flex relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input id="kb-search" class="bg-surface-container-low border border-outline-variant rounded-full pl-10 pr-4 py-2 w-64 text-body-md focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Search knowledge..." type="text">
+</div>
+<!-- Notifications and settings icons removed -->
+<a href="/logout" class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant flex items-center justify-center hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-secondary">logout</span>
+</a>
+</div>
+</div>
+</header>
+<div class="flex flex-1 max-w-max_width mx-auto w-full">
+<!-- SideNavBar Shell -->
+<aside class="hidden lg:flex flex-col h-[calc(100vh-4rem)] sticky top-16 py-md px-sm gap-xs bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline w-64 shrink-0">
+<div class="mb-md px-sm">
+<p class="font-title-md text-title-md font-bold text-on-surface">CRM Admin</p>
+<p class="font-label-md text-label-md text-secondary">Knowledge Management</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-sm px-sm py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="/">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-2 bg-secondary-container text-on-secondary-container rounded-lg font-semibold transition-all duration-200 ease-in-out" href="/serviceReq">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">Knowledge Base</span>
+</a>
+<% if (user && user.role === 'admin') { %>
+<a class="flex items-center gap-sm px-sm py-2 text-on-surface-variant rounded-lg hover:bg-surface-variant transition-all duration-200 ease-in-out" href="/admin/services">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">My Articles</span>
+</a>
+<% } %>
+</nav>
+<div class="mt-auto pt-md border-t border-outline-variant flex flex-col gap-1">
+</div>
+</aside>
+<!-- Main Content Canvas-->
+<main class="flex-1 px-gutter py-xl max-w-4xl mx-auto w-full">
+<!-- Articles List -->
+<div class="mb-xl">
+<div class="flex justify-between items-center mb-lg">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background">Knowledge Base</h1>
+<p class="font-body-md text-body-md text-secondary mt-1">
+<%= services && services.length ? services.length : 0 %> article<%= services && services.length === 1 ? '' : 's' %>
+</p>
+</div>
+</div>
+</div>
+<!-- Articles Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<% if (services && services.length > 0) { %>
+<% services.forEach((service) => { %>
+<%
+const serviceContent = service.content || service.details || '';
+const serviceBody = getArticleBody(service);
+const serviceSteps = serviceBody.steps;
+const serviceDepartments = serviceSteps.map((step) => step.department).filter(Boolean);
+const servicePlainDescription = stripHtml(service.description || service.details || '');
+const serviceSearchText = [
+    service.name || '',
+    servicePlainDescription,
+    stripHtml(serviceBody.bulkContent || ''),
+    ...serviceSteps.map((s) => [s.department, stripHtml(s.content)].join(' '))
+].join(' ');
+%>
+<article class="group bg-surface border border-outline-variant rounded-xl p-md shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all min-w-0 overflow-hidden" data-article-card data-title="<%= service.name %>" data-description="<%= servicePlainDescription %>" data-category="<%= service.category && service.category.name ? service.category.name : '' %>" data-search-text="<%= serviceSearchText %>">
+<h2 class="font-title-lg text-title-lg text-on-surface mb-sm group-hover:text-primary transition-colors break-words" style="overflow-wrap: anywhere; word-break: break-word;"><%= service.name %></h2>
+<p class="font-body-md text-body-md text-secondary mb-lg flex-1 break-words" style="overflow-wrap: anywhere; word-break: break-word;"><%= servicePlainDescription || 'A comprehensive guide on this topic.' %></p>
+<div class="flex items-center justify-between pt-md border-t border-outline-variant">
+<div class="flex items-center gap-xs text-secondary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">update</span>
+<% if (service.updatedAt) { %>
+<%= new Date(service.updatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %>
+<% } else { %>
+Recently updated
+<% } %>
+</div>
+<a href="/serviceReq/<%= service.slug %>" class="px-md py-xs bg-primary-container text-on-tertiary rounded-lg font-title-md text-title-md hover:opacity-90 active:scale-95 transition-all">Open</a>
+</div>
+</article>
+<% }); %>
+<% } else { %>
+<div class="md:col-span-2 text-center py-lg">
+<span class="material-symbols-outlined text-[48px] text-secondary mx-auto mb-md opacity-50">description</span>
+<h3 class="font-title-lg text-title-lg text-on-surface">No knowledge articles available</h3>
+<p class="font-body-md text-body-md text-secondary">Articles will appear here once they are created.</p>
+</div>
+<% } %>
+</div>
+</main>
+</div>
+<div id="article-modal" class="fixed inset-0 z-[100] hidden bg-black/50 p-4">
+  <div class="mx-auto flex max-h-[85vh] w-full max-w-2xl flex-col rounded-2xl bg-white shadow-2xl">
+    <div class="flex items-start justify-between border-b border-outline-variant px-lg py-md">
+      <div>
+        <p id="article-modal-category" class="font-label-md text-label-md text-primary mb-xs"></p>
+        <h3 id="article-modal-title" class="font-headline-md text-headline-md text-on-surface"></h3>
+      </div>
+      <button id="article-modal-close" type="button" class="rounded-full p-2 text-secondary hover:bg-surface-variant">✕</button>
+    </div>
+    <div class="overflow-y-auto px-lg py-md">
+      <div class="mb-md">
+        <h4 class="font-title-md text-title-md text-on-surface mb-xs">Description</h4>
+        <p id="article-modal-description" class="font-body-lg text-body-lg text-secondary break-words" style="overflow-wrap: anywhere; word-break: break-word; white-space: pre-wrap;"></p>
+      </div>
+      <div>
+        <h4 class="font-title-md text-title-md text-on-surface mb-xs">Detailed Content</h4>
+        <div id="article-modal-content" class="font-body-md text-body-md text-on-surface leading-7 break-words min-w-0" style="overflow-wrap: anywhere; word-break: break-word; white-space: pre-wrap;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  const escapeHtml = (value) => String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+  const searchInput = document.getElementById('kb-search');
+  searchInput?.addEventListener('input', (event) => {
+    const query = event.target.value.toLowerCase().trim();
+    const cards = document.querySelectorAll('[data-article-card]');
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const title = (card.getAttribute('data-title') || '').toLowerCase();
+      const description = (card.getAttribute('data-description') || '').toLowerCase();
+      const category = (card.getAttribute('data-category') || '').toLowerCase();
+      const searchText = (card.getAttribute('data-search-text') || '').toLowerCase();
+      const matches = title.includes(query) || description.includes(query) || category.includes(query) || searchText.includes(query);
+      card.style.display = matches ? '' : 'none';
+      if (matches) visibleCount++;
+    });
+  });
+
+  const modal = document.getElementById('article-modal');
+  const modalTitle = document.getElementById('article-modal-title');
+  const modalCategory = document.getElementById('article-modal-category');
+  const modalDescription = document.getElementById('article-modal-description');
+  const modalContent = document.getElementById('article-modal-content');
+  const modalClose = document.getElementById('article-modal-close');
+
+  document.querySelectorAll('[data-open-article]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const article = JSON.parse(button.getAttribute('data-open-article'));
+      modalTitle.textContent = article.name || 'Article';
+      modalCategory.textContent = article.category || '';
+      modalDescription.textContent = article.description || '';
+      const detailContent = article.content || article.description || 'No content available yet.';
+      const detailSections = detailContent.split(/\n\s*\n/).filter(Boolean);
+      modalContent.innerHTML = detailSections.map((section, index) => {
+        const lines = section.split(/\r?\n/).map((line) => line.trim());
+        const firstLine = lines[0] || '';
+        const numberedMatch = firstLine.match(/^(\d+)\.\s*(.*)$/);
+        const departmentLine = lines.find((line) => /^department:/i.test(line));
+        const department = departmentLine ? departmentLine.replace(/^department:/i, '').trim() : '';
+        const contentLines = lines.filter((line, lineIndex) => {
+          if (lineIndex === 0 && numberedMatch) return false;
+          const trimmed = line.trim();
+          if (!trimmed) return false;
+          if (/^department:/i.test(trimmed) || /^content:/i.test(trimmed)) return false;
+          return true;
+        });
+        const numberText = numberedMatch ? `${numberedMatch[1]}.` : `${index + 1}.`;
+        const contentText = contentLines.join('\n').trim();
+        const departmentMarkup = department ? `<div class="font-semibold text-secondary mb-1 break-words" style="overflow-wrap: anywhere; word-break: break-word; white-space: pre-wrap;">Department: ${escapeHtml(department)}</div>` : '';
+        const contentMarkup = contentText ? `<div class="break-words" style="overflow-wrap: anywhere; word-break: break-word; white-space: pre-wrap;">${escapeHtml(contentText).replace(/\n/g, '<br>')}</div>` : '';
+        return `<div class="flex gap-sm mb-sm min-w-0"><span class="font-semibold text-primary mt-1 shrink-0">${numberText}</span><div class="flex-1 min-w-0 break-words" style="overflow-wrap: anywhere; word-break: break-word;">${departmentMarkup}${contentMarkup}</div></div>`;
+      }).join('');
+      modal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    });
+  });
+
+  const closeModal = () => {
+    modal.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+  };
+
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) closeModal();
+  });
+</script>
+<!-- Footer Shell -->
+<footer class="bg-surface dark:bg-surface-container border-t border-outline-variant dark:border-outline mt-auto"></footer>
+</body>
+</html>
+
+                window.addEventListener('click', function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            </script>
+        </main>
+    </div>
+
+</body>
+</html>
