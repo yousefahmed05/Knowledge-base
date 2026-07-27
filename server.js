@@ -17,40 +17,44 @@ const { requireAuth, requireAdmin } = require('./middleware/auth');
 let connectionPromise = null;
 
 function connectDB() {
+    if (mongoose.connection.readyState === 1) {
+        return Promise.resolve();
+    }
     if (connectionPromise) return connectionPromise;
 
     connectionPromise = (async () => {
         try {
             const connectionString = process.env.MONGODB_URI || 'mongodb+srv://SeifHassan:seifhassan17@crm.bagyzhs.mongodb.net/Database';
-            try {
-                dns.setServers(['8.8.8.8', '8.8.4.4']);
-            } catch(e) {}
+            
+            // Only set custom DNS in non-serverless local environment if needed
+            if (!process.env.VERCEL && !process.env.AWS_REGION && !process.env.LAMBDA_TASK_ROOT) {
+                try {
+                    dns.setServers(['8.8.8.8', '8.8.4.4']);
+                } catch(e) {}
+            }
             
             await mongoose.connect(connectionString, {
-                serverSelectionTimeoutMS: 5000 // Fail faster if unable to connect
+                serverSelectionTimeoutMS: 5000,
+                connectTimeoutMS: 10000
             });
             console.log('✅ MongoDB connected');
             
             const User = require('./models/User');
             const { ensureDefaultAdmin } = require('./utils/adminSeed');
-            const result = await ensureDefaultAdmin(User);
-            if (result.created) {
-                console.log(`🛡️ Seeded default admin account: ${result.user.email}`);
-            } else {
-                console.log(`🛡️ Admin account ready: ${result.user.email}`);
-            }
+            await ensureDefaultAdmin(User);
         } catch (err) {
             console.error('❌ MongoDB connection error:', err.message);
-            console.warn('MongoDB not connected — some features may not work');
+            console.warn('MongoDB not connected — some features may fall back');
             connectionPromise = null; // Allow retrying on failure
+            throw err;
         }
     })();
 
     return connectionPromise;
 }
 
-// Ensure database connection is initialized for serverless environments (Vercel)
-connectDB();
+// Ensure database connection is initialized
+connectDB().catch(() => {});
 
 // ============= MIDDLEWARE =============
 app.set('view engine', 'ejs');
@@ -59,6 +63,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+
+// Serverless DB connection middleware
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+    } catch (err) {
+        // Continue handling request with graceful page fallbacks
+    }
+    next();
+});
 app.locals.siteName = 'GlobalTours';
 app.locals.currentYear = new Date().getFullYear();
 

@@ -87,10 +87,13 @@ router.post('/login', async (req, res) => {
                 { expiresIn: '1d' }
             );
 
+            const isSecure = req.secure || req.headers['x-forwarded-proto'] === 'https';
+            const isIframe = req.headers['sec-fetch-dest'] === 'iframe';
+
             res.cookie('jwt', token, {
                 httpOnly: true,
-                secure: false,
-                sameSite: 'lax',
+                secure: isSecure,
+                sameSite: isSecure && isIframe ? 'none' : 'lax',
                 maxAge: 24 * 60 * 60 * 1000
             });
 
@@ -118,10 +121,13 @@ router.post('/login', async (req, res) => {
             { expiresIn: '1d' }
         );
 
+        const isSecure = req.secure || req.headers['x-forwarded-proto'] === 'https';
+        const isIframe = req.headers['sec-fetch-dest'] === 'iframe';
+
         res.cookie('jwt', token, {
             httpOnly: true,
-            secure: false,
-            sameSite: 'lax',
+            secure: isSecure,
+            sameSite: isSecure && isIframe ? 'none' : 'lax',
             maxAge: 24 * 60 * 60 * 1000
         });
 
