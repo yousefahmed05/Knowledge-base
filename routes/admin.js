@@ -16,7 +16,12 @@ const newsStorage = multer.memoryStorage();
 
 const newsUpload = multer({
     storage: newsStorage,
-    limits: { fileSize: 5 * 1024 * 1024 },
+    limits: {
+        fileSize: 20 * 1024 * 1024,
+        fieldSize: 25 * 1024 * 1024,
+        files: 1,
+        parts: 50
+    },
     fileFilter: (req, file, cb) => {
         if (/^image\/(jpeg|jpg|png|gif|webp)$/i.test(file.mimetype)) {
             cb(null, true);

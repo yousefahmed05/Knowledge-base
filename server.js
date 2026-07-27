@@ -8,7 +8,7 @@ const PORT = 3000;
 
 // Import routes and middleware
 const pageRoutes = require('./routes/pages');
-const authRoutes = require('./routes/auth');
+const authRoutes = require('./middleware/auth');
 const adminRoutes = require('./routes/admin');
 const { requireAuth, requireAdmin } = require('./middleware/auth');
 
