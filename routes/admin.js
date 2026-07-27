@@ -1,22 +1,15 @@
 ﻿const express = require('express');
-const path = require('path');
-const fs = require('fs');
 const multer = require('multer');
 const router = express.Router();
 const { requireAuth, requireAdmin } = require('../middleware/auth');
 const Service = require('../models/Service');
 const News = require('../models/News');
 const { stripHtml } = require('../utils/articleDetails');
-const { toDataUrl } = require('../utils/newsImageStorage');
+const { toDataUrl, toDataUrlFromFilePath } = require('../utils/newsImageStorage');
 
 // Helper function to generate slug
 function generateSlug(text) {
     return text.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+\$/g, '');
-}
-
-const newsUploadDir = path.join(__dirname, '..', 'public', 'uploads', 'news');
-if (!fs.existsSync(newsUploadDir)) {
-    fs.mkdirSync(newsUploadDir, { recursive: true });
 }
 
 const newsStorage = multer.memoryStorage();
@@ -32,14 +25,6 @@ const newsUpload = multer({
         }
     }
 });
-
-function deleteNewsImage(imageUrl) {
-    if (!imageUrl || !imageUrl.startsWith('/uploads/news/')) return;
-    const filePath = path.join(__dirname, '..', 'public', imageUrl);
-    if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath);
-    }
-}
 
 // GET /admin/services - List all services
 router.get('/admin/services', requireAuth, requireAdmin, async (req, res) => {
@@ -278,9 +263,6 @@ router.post('/admin/news/:id/edit', requireAuth, requireAdmin, newsUpload.single
         newsItem.updatedAt = Date.now();
 
         if (req.file) {
-            if (newsItem.imageUrl && newsItem.imageUrl.startsWith('/uploads/news/')) {
-                deleteNewsImage(newsItem.imageUrl);
-            }
             newsItem.imageUrl = toDataUrl(req.file);
         }
 
@@ -299,11 +281,41 @@ router.post('/admin/news/:id/delete', requireAuth, requireAdmin, async (req, res
         if (!newsItem) {
             return res.status(404).send('News not found');
         }
-        deleteNewsImage(newsItem.imageUrl);
         res.redirect('/admin/news');
     } catch (err) {
         console.error('Error deleting news:', err);
         res.status(500).send('Error deleting news');
+    }
+});
+
+// Migrate existing filesystem-based news images into the database
+router.get('/admin/migrate-news-images', requireAuth, requireAdmin, async (req, res) => {
+    try {
+        const allNews = await News.find({});
+        let migrated = 0;
+
+        for (const newsItem of allNews) {
+            if (!newsItem.imageUrl || !newsItem.imageUrl.startsWith('/uploads/news/')) {
+                continue;
+            }
+
+            const filePath = `public${newsItem.imageUrl}`;
+            try {
+                newsItem.imageUrl = toDataUrlFromFilePath(filePath);
+                await newsItem.save();
+                migrated++;
+            } catch (_err) {
+                // skip items whose file is missing
+            }
+        }
+
+        res.json({
+            message: `Migrated ${migrated} news image(s) into the database`,
+            migrated
+        });
+    } catch (err) {
+        console.error('Error migrating news images:', err);
+        res.status(500).json({ error: err.message });
     }
 });
 
