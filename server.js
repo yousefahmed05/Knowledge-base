@@ -1,10 +1,11 @@
 require('dotenv').config();
+const path = require('path');
 const dns = require('dns');
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Import routes and middleware
 const pageRoutes = require('./routes/pages');
@@ -30,7 +31,8 @@ async function connectDB() {
 
 // ============= MIDDLEWARE =============
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
@@ -94,7 +96,11 @@ async function startServer() {
     });
 }
 
-startServer().catch(err => {
-    console.error('Failed to start server:', err);
-    process.exit(1);
-});
+if (require.main === module) {
+    startServer().catch(err => {
+        console.error('Failed to start server:', err);
+        process.exit(1);
+    });
+}
+
+module.exports = app;
