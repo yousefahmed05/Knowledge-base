@@ -7,6 +7,7 @@ const { requireAuth, requireAdmin } = require('../middleware/auth');
 const Service = require('../models/Service');
 const News = require('../models/News');
 const { stripHtml } = require('../utils/articleDetails');
+const { toDataUrl } = require('../utils/newsImageStorage');
 
 // Helper function to generate slug
 function generateSlug(text) {
@@ -18,14 +19,7 @@ if (!fs.existsSync(newsUploadDir)) {
     fs.mkdirSync(newsUploadDir, { recursive: true });
 }
 
-const newsStorage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, newsUploadDir),
-    filename: (req, file, cb) => {
-        const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-        const ext = path.extname(file.originalname).toLowerCase();
-        cb(null, `news-${unique}${ext}`);
-    }
-});
+const newsStorage = multer.memoryStorage();
 
 const newsUpload = multer({
     storage: newsStorage,
@@ -74,13 +68,14 @@ router.get('/admin/services/new', requireAuth, requireAdmin, async (req, res) =>
 router.post('/admin/services', requireAuth, requireAdmin, async (req, res) => {
     try {
         const { name, categoryId, description, details, detailsLayout, bulkContent, order } = req.body;
+        const cleanName = stripHtml(name).trim();
 
         // Validation
-        if (!name) {
+        if (!cleanName) {
             return res.status(400).send('Name is required');
         }
 
-        const slug = generateSlug(name);
+        const slug = generateSlug(cleanName);
         
         // Check if slug already exists
         const existingService = await Service.findOne({ slug });
@@ -91,7 +86,7 @@ router.post('/admin/services', requireAuth, requireAdmin, async (req, res) => {
         const layout = ['bulk', 'steps', 'both'].includes(detailsLayout) ? detailsLayout : 'steps';
 
         const service = new Service({
-            name,
+            name: cleanName,
             slug,
             description,
             detailsLayout: layout,
@@ -127,6 +122,7 @@ router.get('/admin/services/:id/edit', requireAuth, requireAdmin, async (req, re
 router.post('/admin/services/:id/edit', requireAuth, requireAdmin, async (req, res) => {
     try {
         const { name, categoryId, description, details, detailsLayout, bulkContent, order } = req.body;
+        const cleanName = stripHtml(name).trim();
         const service = await Service.findById(req.params.id);
 
         if (!service) {
@@ -134,11 +130,11 @@ router.post('/admin/services/:id/edit', requireAuth, requireAdmin, async (req, r
         }
 
         // Validation
-        if (!name) {
+        if (!cleanName) {
             return res.status(400).send('Name is required');
         }
 
-        const slug = generateSlug(name);
+        const slug = generateSlug(cleanName);
 
         // Check if new slug conflicts with other services
         if (slug !== service.slug) {
@@ -150,7 +146,7 @@ router.post('/admin/services/:id/edit', requireAuth, requireAdmin, async (req, r
 
         const layout = ['bulk', 'steps', 'both'].includes(detailsLayout) ? detailsLayout : 'steps';
 
-        service.name = name;
+        service.name = cleanName;
         service.slug = slug;
         service.description = description;
         service.detailsLayout = layout;
@@ -217,7 +213,7 @@ router.post('/admin/news', requireAuth, requireAdmin, newsUpload.single('image')
         const newsItem = new News({
             title: cleanTitle,
             content,
-            imageUrl: `/uploads/news/${req.file.filename}`,
+            imageUrl: toDataUrl(req.file),
             order: parseInt(order, 10) || 0,
             active: active === 'on' || active === 'true' || active === '1'
         });
@@ -237,7 +233,7 @@ router.post('/admin/news/upload-image', requireAuth, requireAdmin, newsUpload.si
             return res.status(400).json({ error: 'No file uploaded' });
         }
 
-        const location = `/uploads/news/${req.file.filename}`;
+        const location = toDataUrl(req.file);
         res.json({
             location: location
         });
@@ -282,8 +278,10 @@ router.post('/admin/news/:id/edit', requireAuth, requireAdmin, newsUpload.single
         newsItem.updatedAt = Date.now();
 
         if (req.file) {
-            deleteNewsImage(newsItem.imageUrl);
-            newsItem.imageUrl = `/uploads/news/${req.file.filename}`;
+            if (newsItem.imageUrl && newsItem.imageUrl.startsWith('/uploads/news/')) {
+                deleteNewsImage(newsItem.imageUrl);
+            }
+            newsItem.imageUrl = toDataUrl(req.file);
         }
 
         await newsItem.save();

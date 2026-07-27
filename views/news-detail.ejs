@@ -107,10 +107,10 @@
 <main class="flex-1 px-gutter py-xl max-w-4xl mx-auto w-full">
 <a href="/" id="news-back-link" class="inline-flex items-center gap-xs text-primary mb-lg font-semibold">&larr; Back</a>
 <article class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm">
-<img src="<%= newsItem.imageUrl %>" alt="<%= newsItem.title %>" class="w-full max-h-[420px] object-cover">
+<img src="<%= newsItem.imageUrl %>" alt="<%= stripHtml(newsItem.title || '') %>" class="w-full max-h-[420px] object-cover">
 <div class="p-lg">
 <p class="font-label-md text-label-md text-primary mb-xs">News</p>
-<h1 class="font-headline-lg text-headline-lg text-on-surface mb-md"><%= newsItem.title %></h1>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-md"><%= stripHtml(newsItem.title || '') %></h1>
 <div class="font-body-lg text-body-lg text-on-surface leading-7"><%- newsItem.content %></div>
 </div>
 </article>

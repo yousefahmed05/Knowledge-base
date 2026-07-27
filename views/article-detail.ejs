@@ -159,7 +159,7 @@
 <%= service.category && service.category.name ? service.category.name : 'Article' %>
 </span>
 </div>
-<h1 class="font-headline-lg text-headline-lg text-on-surface mb-sm break-words" style="overflow-wrap: anywhere; word-break: break-word;"><%= service.name %></h1>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-sm break-words" style="overflow-wrap: anywhere; word-break: break-word;"><%= stripHtml(service.name || '') %></h1>
 <div class="mb-lg min-w-0">
 <h2 class="font-title-md text-title-md text-on-surface mb-xs">Description</h2>
 <% const descriptionHtml = service.description || ''; %>

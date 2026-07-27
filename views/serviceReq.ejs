@@ -181,8 +181,8 @@ const serviceSearchText = [
     ...serviceSteps.map((s) => [s.department, stripHtml(s.content)].join(' '))
 ].join(' ');
 %>
-<article class="group bg-surface border border-outline-variant rounded-xl p-md shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all min-w-0 overflow-hidden" data-article-card data-title="<%= service.name %>" data-description="<%= servicePlainDescription %>" data-category="<%= service.category && service.category.name ? service.category.name : '' %>" data-search-text="<%= serviceSearchText %>">
-<h2 class="font-title-lg text-title-lg text-on-surface mb-sm group-hover:text-primary transition-colors break-words" style="overflow-wrap: anywhere; word-break: break-word;"><%= service.name %></h2>
+<article class="group bg-surface border border-outline-variant rounded-xl p-md shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all min-w-0 overflow-hidden" data-article-card data-title="<%= stripHtml(service.name || '') %>" data-description="<%= servicePlainDescription %>" data-category="<%= service.category && service.category.name ? service.category.name : '' %>" data-search-text="<%= serviceSearchText %>">
+<h2 class="font-title-lg text-title-lg text-on-surface mb-sm group-hover:text-primary transition-colors break-words" style="overflow-wrap: anywhere; word-break: break-word;"><%= stripHtml(service.name || '') %></h2>
 <p class="font-body-md text-body-md text-secondary mb-lg flex-1 break-words" style="overflow-wrap: anywhere; word-break: break-word;"><%= servicePlainDescription || 'A comprehensive guide on this topic.' %></p>
 <div class="flex items-center justify-between pt-md border-t border-outline-variant">
 <div class="flex items-center gap-xs text-secondary font-label-md text-label-md">

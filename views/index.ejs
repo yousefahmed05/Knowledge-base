@@ -184,10 +184,10 @@ News
 <div class="overflow-x-auto pb-md -mx-1 px-1 custom-scrollbar" style="scrollbar-width: thin;">
 <div class="flex gap-md w-max" id="news-scroller-track">
 <% newsItems.forEach(item => { %>
-<a href="/news/<%= item._id %>" class="group relative block w-64 sm:w-72 shrink-0 rounded-xl overflow-hidden border border-outline-variant bg-surface shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all snap-start" data-news-card data-title="<%= item.title %>" data-search-text="<%= (item.title || '') + ' ' + (item.content || '') %>">
-<img src="<%= item.imageUrl %>" alt="<%= (item.title || '').replace(/<[^>]*>/g, '') %>" class="w-full h-40 object-cover group-hover:scale-[1.02] transition-transform duration-300">
+<a href="/news/<%= item._id %>" class="group relative block w-64 sm:w-72 shrink-0 rounded-xl overflow-hidden border border-outline-variant bg-surface shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all snap-start" data-news-card data-title="<%= stripHtml(item.title || '') %>" data-search-text="<%= stripHtml(item.title || '') + ' ' + stripHtml(item.content || '') %>">
+<img src="<%= item.imageUrl %>" alt="<%= stripHtml(item.title || '') %>" class="w-full h-40 object-cover group-hover:scale-[1.02] transition-transform duration-300">
 <div class="p-sm">
-<p class="font-title-md text-title-md text-on-surface line-clamp-2 group-hover:text-primary transition-colors"><%= (item.title || '').replace(/<[^>]*>/g, '') %></p>
+<p class="font-title-md text-title-md text-on-surface line-clamp-2 group-hover:text-primary transition-colors"><%= stripHtml(item.title || '') %></p>
 </div>
 </a>
 <% }); %>
@@ -219,8 +219,8 @@ const destinationSearchText = [
 ].join(' ');
 %>
 <!-- Result Card -->
-<article class="bg-surface border border-outline-variant rounded-xl p-md shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col group h-full min-w-0 overflow-hidden" data-article-card data-title="<%= destination.name %>" data-description="<%= destinationPlainDescription %>" data-category="<%= destination.category && destination.category.name ? destination.category.name : '' %>" data-search-text="<%= destinationSearchText %>">
-<h3 class="font-title-lg text-title-lg text-on-surface mb-sm group-hover:text-primary transition-colors break-words" style="overflow-wrap: anywhere; word-break: break-word;"><%= destination.name %></h3>
+<article class="bg-surface border border-outline-variant rounded-xl p-md shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col group h-full min-w-0 overflow-hidden" data-article-card data-title="<%= stripHtml(destination.name || '') %>" data-description="<%= destinationPlainDescription %>" data-category="<%= destination.category && destination.category.name ? destination.category.name : '' %>" data-search-text="<%= destinationSearchText %>">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-sm group-hover:text-primary transition-colors break-words" style="overflow-wrap: anywhere; word-break: break-word;"><%= stripHtml(destination.name || '') %></h3>
 <p class="font-body-md text-body-md text-secondary mb-lg flex-1 break-words" style="overflow-wrap: anywhere; word-break: break-word;"><%= destinationPlainDescription || 'No description provided yet.' %></p>
 <div class="flex items-center justify-between pt-md border-t border-outline-variant">
 <div class="flex items-center gap-xs text-secondary font-label-md text-label-md">
@@ -238,12 +238,12 @@ Recently updated
 <% } %>
 <% if (typeof newsItems !== 'undefined' && newsItems && newsItems.length > 0) { %>
 <% newsItems.forEach(item => { %>
-<article class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col group h-full hidden" data-news-result-card data-title="<%= item.title %>" data-search-text="<%= (item.title || '') + ' ' + (item.content || '') %>">
-<img src="<%= item.imageUrl %>" alt="<%= (item.title || '').replace(/<[^>]*>/g, '') %>" class="w-full h-36 object-cover">
+<article class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col group h-full hidden" data-news-result-card data-title="<%= stripHtml(item.title || '') %>" data-search-text="<%= stripHtml(item.title || '') + ' ' + stripHtml(item.content || '') %>">
+<img src="<%= item.imageUrl %>" alt="<%= stripHtml(item.title || '') %>" class="w-full h-36 object-cover">
 <div class="p-md flex flex-col flex-1">
 <p class="font-label-md text-label-md text-primary mb-xs">News</p>
-<h3 class="font-title-lg text-title-lg text-on-surface mb-sm group-hover:text-primary transition-colors"><%= (item.title || '').replace(/<[^>]*>/g, '') %></h3>
-<p class="font-body-md text-body-md text-secondary mb-lg flex-1 line-clamp-3"><%= (item.content || '').replace(/<[^>]*>/g, '') %></p>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-sm group-hover:text-primary transition-colors"><%= stripHtml(item.title || '') %></h3>
+<p class="font-body-md text-body-md text-secondary mb-lg flex-1 line-clamp-3"><%= stripHtml(item.content || '') %></p>
 <div class="flex items-center justify-between pt-md border-t border-outline-variant">
 <a href="/news/<%= item._id %>" class="px-md py-xs bg-primary-container text-on-tertiary rounded-lg font-title-md text-title-md hover:opacity-90 active:scale-95 transition-all">Open</a>
 </div>
