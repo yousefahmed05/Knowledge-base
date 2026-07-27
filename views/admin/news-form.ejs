@@ -68,7 +68,7 @@
         },
       }
     }catch(_e){}</script>
-    <title><%= newsItem ? 'Edit' : 'Create' %> News - Oracle CRM</title>
+    <title><%= newsItem ? 'Edit' : 'Create' %> News - Elsewedy Development</title>
     <script src="https://cdn.jsdelivr.net/npm/tinymce@7.6.1/tinymce.min.js" referrerpolicy="origin"></script>
     <style>
       .tox-tinymce { border-radius: 0.5rem !important; border-color: #8d706e !important; }
@@ -77,7 +77,10 @@
 <body class="bg-[#F5F6F8] text-on-surface font-body-lg min-h-screen flex flex-col">
 <header class="bg-surface border-b border-outline-variant sticky top-0 z-50">
 <div class="flex justify-between items-center px-gutter w-full h-16 max-w-max_width mx-auto">
-<span class="font-headline-md text-headline-md font-bold text-primary">Oracle CRM Knowledge Base</span>
+<a href="/" class="flex items-center gap-sm cursor-pointer active:scale-95 transition-transform">
+<img src="https://elsewedydevelopment.com/wp-content/uploads/2023/04/SD-web-Logo.png" alt="Elsewedy Development" class="h-9 object-contain">
+<span class="font-headline-md text-headline-md font-bold text-primary hidden sm:inline"><%= newsItem ? 'Edit' : 'Create' %> News</span>
+</a>
 <div class="flex items-center gap-sm">
 <a href="/admin/news" class="bg-primary text-on-primary px-sm py-xs rounded-lg font-title-md hover:bg-primary-container transition-all active:scale-95">Back</a>
 <a href="/logout" class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant flex items-center justify-center hover:bg-surface-variant transition-colors" title="Logout">

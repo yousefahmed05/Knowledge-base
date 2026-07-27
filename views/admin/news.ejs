@@ -75,12 +75,15 @@
         },
       }
     }catch(_e){}</script>
-    <title>Manage News - Oracle CRM</title>
+    <title>Manage News - Elsewedy Development</title>
 </head>
 <body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col">
 <header class="bg-surface border-b border-outline-variant sticky top-0 z-50">
 <div class="flex justify-between items-center px-gutter w-full h-16 max-w-max_width mx-auto">
-<span class="font-headline-md text-headline-md font-bold text-primary">Oracle CRM Knowledge Base</span>
+<a href="/" class="flex items-center gap-sm cursor-pointer active:scale-95 transition-transform">
+<img src="https://elsewedydevelopment.com/wp-content/uploads/2023/04/SD-web-Logo.png" alt="Elsewedy Development" class="h-9 object-contain">
+<span class="font-headline-md text-headline-md font-bold text-primary hidden sm:inline">Manage News</span>
+</a>
 <div class="flex items-center gap-sm">
 <a href="/admin/news/new" class="bg-primary text-on-primary px-sm py-xs rounded-lg font-title-md hover:bg-primary-container transition-all active:scale-95 flex items-center gap-xs">
 <span class="material-symbols-outlined">add</span>
@@ -99,7 +102,7 @@ New News
 <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
 <span class="material-symbols-outlined text-on-primary">corporate_fare</span>
 </div>
-<span class="font-title-md text-title-md font-bold text-on-surface">CRM Admin</span>
+<span class="font-title-md text-title-md font-bold text-on-surface">Elsewedy Portal</span>
 </div>
 <p class="font-label-md text-label-md text-secondary opacity-70">Knowledge Management</p>
 </div>
@@ -112,13 +115,17 @@ Home
 <span class="material-symbols-outlined">history</span>
 Knowledge Base
 </a>
-<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-lg font-label-md text-label-md transition-all" href="/admin/services">
-<span class="material-symbols-outlined">dashboard</span>
-Articles
-</a>
-<a class="flex items-center gap-sm px-sm py-base bg-secondary-container text-on-secondary-container rounded-lg font-label-md text-label-md font-semibold transition-all" href="/admin/news">
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-lg font-label-md text-label-md transition-all" href="/news">
 <span class="material-symbols-outlined">newspaper</span>
 News
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-lg font-label-md text-label-md transition-all" href="/admin/services">
+<span class="material-symbols-outlined">dashboard</span>
+My Articles
+</a>
+<a class="flex items-center gap-sm px-sm py-base bg-secondary-container text-on-secondary-container rounded-lg font-label-md text-label-md font-semibold transition-all" href="/admin/news">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+Manage News
 </a>
 </nav>
 </aside>

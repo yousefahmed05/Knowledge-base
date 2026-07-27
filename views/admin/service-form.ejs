@@ -102,7 +102,7 @@
         },
       }
     }catch(_e){}</script>
-    <title><%= service ? 'Edit' : 'Create' %> Article - Oracle CRM</title>
+    <title><%= service ? 'Edit' : 'Create' %> Article - Elsewedy Development</title>
     <script src="https://cdn.jsdelivr.net/npm/tinymce@7.6.1/tinymce.min.js" referrerpolicy="origin"></script>
     <style>
       .tox-tinymce { border-radius: 0.5rem !important; border-color: #8d706e !important; }
@@ -114,9 +114,10 @@
 <header class="bg-surface dark:bg-surface-container border-b border-outline-variant dark:border-outline sticky top-0 z-50">
 <div class="flex justify-between items-center px-gutter w-full h-16 max-w-max_width mx-auto">
 <div class="flex items-center gap-md">
-<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Oracle CRM Knowledge Base</span>
-<nav class="hidden md:flex gap-sm items-center ml-lg">
-</nav>
+<a href="/" class="flex items-center gap-sm cursor-pointer active:scale-95 transition-transform">
+<img src="https://elsewedydevelopment.com/wp-content/uploads/2023/04/SD-web-Logo.png" alt="Elsewedy Development" class="h-9 object-contain">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim hidden sm:inline"><%= service ? 'Edit' : 'Create' %> Article</span>
+</a>
 </div>
 <div class="flex items-center gap-sm">
                 <!-- Notifications and settings icons removed -->
@@ -235,6 +236,14 @@ rows="4"><%= service && service.description ? service.description : '' %></texta
 </div>
 <!-- Footer -->
 <footer class="bg-surface dark:bg-surface-container border-t border-outline-variant dark:border-outline mt-auto"></footer>
+
+<script type="application/json" id="initial-service-data">
+  <%- JSON.stringify({
+    details: service ? service.details : '',
+    detailsLayout: (service && service.detailsLayout) ? service.detailsLayout : 'steps'
+  }) %>
+</script>
+
 <script>
   const detailCardsContainer = document.getElementById('detail-cards');
   const detailsHiddenInput = document.getElementById('details');
@@ -242,8 +251,9 @@ rows="4"><%= service && service.description ? service.description : '' %></texta
   const bulkPanel = document.getElementById('bulk-panel');
   const stepsPanel = document.getElementById('steps-panel');
   const articleForm = document.getElementById('article-form');
-  const initialDetailsValue = <%- JSON.stringify(service ? service.details : '') %>;
-  const initialLayout = <%- JSON.stringify((service && service.detailsLayout) ? service.detailsLayout : 'steps') %>;
+  const serviceData = JSON.parse(document.getElementById('initial-service-data')?.textContent || '{}');
+  const initialDetailsValue = serviceData.details || '';
+  const initialLayout = serviceData.detailsLayout || 'steps';
   let editorSeq = 0;
   let stepsInitialized = false;
   let bulkEditorReady = false;

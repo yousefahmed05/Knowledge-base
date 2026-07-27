@@ -71,7 +71,10 @@
 <body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col">
 <header class="bg-surface border-b border-outline-variant sticky top-0 z-50">
 <div class="flex justify-between items-center px-gutter w-full h-16 max-w-max_width mx-auto">
-<a href="/" class="font-headline-md text-headline-md font-bold text-primary">Oracle CRM Knowledge Base</a>
+<a href="/" class="flex items-center gap-sm cursor-pointer active:scale-95 transition-transform">
+<img src="https://elsewedydevelopment.com/wp-content/uploads/2023/04/SD-web-Logo.png" alt="Elsewedy Development" class="h-9 object-contain">
+<span class="font-headline-md text-headline-md font-bold text-primary hidden sm:inline">Company News</span>
+</a>
 <a href="/logout" class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant flex items-center justify-center hover:bg-surface-variant transition-colors" title="Logout">
 <span class="material-symbols-outlined text-secondary">logout</span>
 </a>
@@ -80,11 +83,11 @@
 <div class="flex flex-1 max-w-max_width mx-auto w-full">
 <aside class="hidden lg:flex flex-col h-[calc(100vh-4rem)] sticky top-16 py-md px-sm gap-xs bg-surface-container-low border-r border-outline-variant w-64 shrink-0">
 <div class="mb-md px-sm">
-<p class="font-title-md text-title-md font-bold text-on-surface">CRM Admin</p>
-<p class="font-label-md text-label-md text-secondary">Knowledge Management</p>
+<p class="font-title-md text-title-md font-bold text-on-surface">Elsewedy Portal</p>
+<p class="font-label-md text-label-md text-secondary">News & Updates</p>
 </div>
 <nav class="flex flex-col gap-1">
-<a class="flex items-center gap-sm px-sm py-2 bg-secondary-container text-on-secondary-container rounded-lg font-semibold transition-all" href="/">
+<a class="flex items-center gap-sm px-sm py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all" href="/">
 <span class="material-symbols-outlined">home</span>
 <span class="font-label-md text-label-md">Home</span>
 </a>
@@ -92,24 +95,31 @@
 <span class="material-symbols-outlined">history</span>
 <span class="font-label-md text-label-md">Knowledge Base</span>
 </a>
+<a class="flex items-center gap-sm px-sm py-2 bg-secondary-container text-on-secondary-container rounded-lg font-semibold transition-all" href="/news">
+<span class="material-symbols-outlined">newspaper</span>
+<span class="font-label-md text-label-md">News</span>
+</a>
 <% if (user && user.role === 'admin') { %>
 <a class="flex items-center gap-sm px-sm py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all" href="/admin/services">
 <span class="material-symbols-outlined">dashboard</span>
 <span class="font-label-md text-label-md">My Articles</span>
 </a>
 <a class="flex items-center gap-sm px-sm py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all" href="/admin/news">
-<span class="material-symbols-outlined">newspaper</span>
-<span class="font-label-md text-label-md">News</span>
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-label-md text-label-md">Manage News</span>
 </a>
 <% } %>
 </nav>
 </aside>
 <main class="flex-1 px-gutter py-xl max-w-4xl mx-auto w-full">
-<a href="/" id="news-back-link" class="inline-flex items-center gap-xs text-primary mb-lg font-semibold">&larr; Back</a>
+<a href="/news" id="news-back-link" class="inline-flex items-center gap-xs text-primary mb-lg font-semibold">&larr; Back to News</a>
 <article class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm">
 <img src="<%= newsItem.imageUrl %>" alt="<%= stripHtml(newsItem.title || '') %>" class="w-full max-h-[420px] object-cover">
 <div class="p-lg">
-<p class="font-label-md text-label-md text-primary mb-xs">News</p>
+<div class="flex items-center gap-xs text-primary font-label-md text-label-md font-semibold mb-xs">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span>
+<span>Published on: <%= new Date(newsItem.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></span>
+</div>
 <h1 class="font-headline-lg text-headline-lg text-on-surface mb-md"><%= stripHtml(newsItem.title || '') %></h1>
 <div class="font-body-lg text-body-lg text-on-surface leading-7"><%- newsItem.content %></div>
 </div>

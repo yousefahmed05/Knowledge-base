@@ -102,14 +102,17 @@
         },
       }
     }catch(_e){}</script>
-    <title>Oracle CRM Knowledge Base | GlobalTours</title>
+    <title>Knowledge Base | Elsewedy Development</title>
 </head>
 <body class="bg-surface font-body-lg text-on-surface custom-scrollbar">
 <!-- TopNavBar -->
 <header class="bg-surface dark:bg-surface-container border-b border-outline-variant dark:border-outline sticky top-0 z-50">
 <div class="flex justify-between items-center px-gutter w-full h-16 max-w-max_width mx-auto">
 <div class="flex items-center gap-md">
-<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim cursor-pointer active:scale-95 transition-transform">Oracle CRM Knowledge Base</span>
+<a href="/" class="flex items-center gap-sm cursor-pointer active:scale-95 transition-transform">
+<img src="https://elsewedydevelopment.com/wp-content/uploads/2023/04/SD-web-Logo.png" alt="Elsewedy Development" class="h-9 object-contain">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim hidden sm:inline">Knowledge Base</span>
+</a>
 <nav class="hidden md:flex items-center gap-sm ml-lg">
 </nav>
 </div>
@@ -122,13 +125,6 @@
 </div>
 </div>
 <div class="flex items-center gap-sm">
-<% if (user && user.role === 'admin') { %>
-<a href="/admin/services/new" class="hidden sm:flex items-center gap-xs px-sm py-xs bg-primary text-on-primary rounded-lg font-title-md text-title-md hover:bg-primary-container transition-colors active:scale-95">
-<span class="material-symbols-outlined text-[20px]">add</span>
-Add New
-</a>
-<% } %>
-    <!-- Notifications and settings icons removed -->
 <a href="/logout" class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant flex items-center justify-center hover:bg-surface-variant transition-colors" title="Logout">
 <span class="material-symbols-outlined text-secondary">logout</span>
 </a>
@@ -143,7 +139,7 @@ Add New
 <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
 <span class="material-symbols-outlined text-on-primary" data-icon="corporate_fare">corporate_fare</span>
 </div>
-<span class="font-title-md text-title-md font-bold text-on-surface">CRM Admin</span>
+<span class="font-title-md text-title-md font-bold text-on-surface">Elsewedy Portal</span>
 </div>
 <p class="font-label-md text-label-md text-secondary opacity-70">Knowledge Management</p>
 </div>
@@ -156,14 +152,18 @@ Home
 <span class="material-symbols-outlined" data-icon="history">history</span>
 Knowledge Base
 </a>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-lg font-label-md text-label-md duration-200 ease-in-out transition-all" href="/news">
+<span class="material-symbols-outlined" data-icon="newspaper">newspaper</span>
+News
+</a>
 <% if (user && user.role === 'admin') { %>
 <a class="flex items-center gap-sm px-sm py-base text-on-surface-variant rounded-lg hover:bg-surface-variant font-label-md text-label-md duration-200 ease-in-out transition-all" href="/admin/services">
 <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
 My Articles
 </a>
 <a class="flex items-center gap-sm px-sm py-base text-on-surface-variant rounded-lg hover:bg-surface-variant font-label-md text-label-md duration-200 ease-in-out transition-all" href="/admin/news">
-<span class="material-symbols-outlined" data-icon="newspaper">newspaper</span>
-News
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+Manage News
 </a>
 <% } %>
 </nav>

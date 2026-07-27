@@ -21,11 +21,28 @@ router.get('/', requireAuth, async (req, res) => {
     }
 
     res.render('index', {
-        title: 'Home | GlobalTours',
+        title: 'Home | Elsewedy Development',
         destinations: destinations || [],
         newsItems: newsItems || [],
         user: req.user,
         activePage: 'home'
+    });
+});
+
+// 📰 All User News Page Route (Protected)
+router.get('/news', requireAuth, async (req, res) => {
+    let newsItems = [];
+    try {
+        newsItems = await News.find({ active: true }).sort({ createdAt: -1 });
+    } catch (err) {
+        console.error('Error fetching user news list:', err.message);
+    }
+
+    res.render('user-news', {
+        title: 'Company News | Elsewedy Development',
+        newsItems: newsItems || [],
+        user: req.user,
+        activePage: 'news'
     });
 });
 
