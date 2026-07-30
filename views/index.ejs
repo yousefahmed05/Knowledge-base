@@ -108,7 +108,10 @@
 <!-- TopNavBar -->
 <header class="bg-surface dark:bg-surface-container border-b border-outline-variant dark:border-outline sticky top-0 z-50">
 <div class="flex justify-between items-center px-gutter w-full h-16 max-w-max_width mx-auto">
-<div class="flex items-center gap-md">
+<div class="flex items-center gap-sm">
+<button id="sidebar-toggle-btn" type="button" class="p-2 -ml-2 rounded-lg text-on-surface hover:bg-surface-variant transition-colors flex items-center justify-center focus:outline-none cursor-pointer" aria-label="Toggle Navigation Menu" title="Toggle Sidebar">
+<span class="material-symbols-outlined text-2xl" data-icon="menu">menu</span>
+</button>
 <a href="/" class="flex items-center gap-sm cursor-pointer active:scale-95 transition-transform">
 <img src="https://elsewedydevelopment.com/wp-content/uploads/2023/04/SD-web-Logo.png" alt="Elsewedy Development" class="h-9 object-contain">
 <span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim hidden sm:inline">Employee book</span>
@@ -131,17 +134,25 @@
 </div>
 </div>
 </header>
+<!-- Sidebar Backdrop Overlay -->
+<div id="sidebar-backdrop" class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity duration-300 backdrop-blur-sm cursor-pointer"></div>
+
 <div class="flex max-w-max_width mx-auto min-h-[calc(100vh-64px)]">
-<!-- SideNavBar -->
-<aside class="hidden lg:flex flex-col h-[calc(100vh-64px)] py-md px-sm gap-xs bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline w-64 sticky top-16">
-<div class="px-sm mb-md">
-<div class="flex items-center gap-sm mb-xs">
-<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<!-- Interactive SideNavBar Drawer -->
+<aside id="app-sidebar" class="fixed top-16 left-0 bottom-0 z-50 w-64 py-md px-sm flex flex-col gap-xs bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline transition-transform duration-300 ease-in-out -translate-x-full shadow-2xl overflow-y-auto">
+<div class="px-sm mb-md flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shrink-0">
 <span class="material-symbols-outlined text-on-primary" data-icon="corporate_fare">corporate_fare</span>
 </div>
-<span class="font-title-md text-title-md font-bold text-on-surface">ElSewedy Portal</span>
-</div>
+<div>
+<p class="font-title-md text-title-md font-bold text-on-surface leading-tight">ElSewedy Portal</p>
 <p class="font-label-md text-label-md text-secondary opacity-70">Knowledge Management</p>
+</div>
+</div>
+<button id="sidebar-close-btn" type="button" class="p-1 rounded-lg text-secondary hover:text-primary hover:bg-surface-variant transition-colors" title="Close Menu">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
 </div>
 <nav class="flex-1 flex flex-col gap-xs">
 <a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-lg font-label-md text-label-md duration-200 ease-in-out transition-all bg-surface-variant" href="/">
@@ -449,6 +460,63 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
         searchInput?.focus();
     }
+});
+
+// Interactive Sidebar Toggle Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('sidebar-toggle-btn');
+    const closeBtn = document.getElementById('sidebar-close-btn');
+    const sidebar = document.getElementById('app-sidebar');
+    const backdrop = document.getElementById('sidebar-backdrop');
+
+    if (!sidebar) return;
+
+    function openSidebar() {
+        sidebar.classList.remove('-translate-x-full');
+        sidebar.classList.add('translate-x-0');
+        if (backdrop) backdrop.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+        sidebar.classList.remove('translate-x-0');
+        sidebar.classList.add('-translate-x-full');
+        if (backdrop) backdrop.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = sidebar.classList.contains('translate-x-0');
+            if (isOpen) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeSidebar);
+    }
+
+    if (backdrop) {
+        backdrop.addEventListener('click', closeSidebar);
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sidebar && sidebar.classList.contains('translate-x-0')) {
+            closeSidebar();
+        }
+    });
+
+    const navLinks = sidebar.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            closeSidebar();
+        });
+    });
 });
 </script>
 </body>

@@ -3,175 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Users - Admin Panel</title>
+    <title>Manage Users - ElSewedy Development</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
-    <style>
-        .admin-container {
-            display: flex;
-            min-height: 100vh;
-            width: 100%;
-        }
-        .admin-header {
-            background: white;
-            padding: 20px 40px;
-            border-bottom: 1px solid #e5e5e5;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .admin-header h1 {
-            margin: 0;
-            color: #000000;
-            font-size: 1.5rem;
-        }
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .user-badge {
-            background-color: #a72429;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        .logout-btn {
-            padding: 10px 20px;
-            background-color: #333333;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .logout-btn:hover {
-            background-color: #000000;
-        }
-        .admin-content {
-            flex: 1;
-            padding: 40px;
-            background-color: #f9f9f9;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #a72429;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        .users-table-container {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid #a72429;
-        }
-        .users-table-container h2 {
-            color: #a72429;
-            margin-bottom: 20px;
-        }
-        .users-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .users-table thead {
-            background-color: #f0f0f0;
-            border-bottom: 2px solid #e5e5e5;
-        }
-        .users-table th {
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            color: #333333;
-            font-size: 0.95rem;
-        }
-        .users-table td {
-            padding: 15px;
-            border-bottom: 1px solid #e5e5e5;
-            color: #666666;
-            font-size: 0.95rem;
-        }
-        .users-table tbody tr:hover {
-            background-color: #f9f9f9;
-        }
-        .role-badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        .role-admin {
-            background-color: #a72429;
-            color: white;
-        }
-        .role-user {
-            background-color: #e5e5e5;
-            color: #333333;
-        }
-        .date-cell {
-            color: #999999;
-            font-size: 0.9rem;
-        }
-    </style>
 </head>
-<body>
-    <div class="admin-container">
-        <div style="flex: 1;">
-            <div class="admin-header">
-                <h1>⚙️ Admin Panel</h1>
-                <div class="user-info">
-                    <span><%= user.email %></span>
-                    <span class="user-badge">Admin</span>
-                    <a href="/logout" class="logout-btn">Log Out</a>
-                </div>
-            </div>
+<body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-container border-b border-outline-variant dark:border-outline sticky top-0 z-50">
+<div class="flex justify-between items-center px-gutter w-full h-16 max-w-max_width mx-auto">
+<div class="flex items-center gap-sm">
+<button id="sidebar-toggle-btn" type="button" class="p-2 -ml-2 rounded-lg text-on-surface hover:bg-surface-variant transition-colors flex items-center justify-center focus:outline-none cursor-pointer" aria-label="Toggle Navigation Menu" title="Toggle Sidebar">
+<span class="material-symbols-outlined text-2xl" data-icon="menu">menu</span>
+</button>
+<a href="/" class="flex items-center gap-sm cursor-pointer active:scale-95 transition-transform">
+<img src="https://elsewedydevelopment.com/wp-content/uploads/2023/04/SD-web-Logo.png" alt="Elsewedy Development" class="h-9 object-contain">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim hidden sm:inline">Manage Users</span>
+</a>
+</div>
+<div class="flex items-center gap-sm">
+<div class="flex items-center gap-xs px-sm py-1 bg-surface-variant rounded-full text-label-md font-medium text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">person</span>
+<span><%= user ? user.email : '' %></span>
+<span class="px-2 py-0.5 text-xs bg-primary text-on-primary font-bold rounded-full uppercase ml-1"><%= user ? user.role : 'admin' %></span>
+</div>
+<a href="/logout" class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant flex items-center justify-center hover:bg-surface-variant transition-colors" title="Logout">
+<span class="material-symbols-outlined text-secondary">logout</span>
+</a>
+</div>
+</div>
+</header>
 
-            <div class="admin-content">
-                <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+<!-- Sidebar Backdrop Overlay -->
+<div id="sidebar-backdrop" class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity duration-300 backdrop-blur-sm cursor-pointer"></div>
 
-                <div class="users-table-container">
-                    <h2>👥 Registered Users</h2>
-                    
-                    <table class="users-table">
-                        <thead>
-                            <tr>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Joined</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% users.forEach(user => { %>
-                                <tr>
-                                    <td><%= user.email %></td>
-                                    <td>
-                                        <span class="role-badge <%= user.role === 'admin' ? 'role-admin' : 'role-user' %>">
-                                            <%= user.role %>
-                                        </span>
-                                    </td>
-                                    <td class="date-cell"><%= user.createdAt.toLocaleDateString() %></td>
-                                </tr>
-                            <% }); %>
-                        </tbody>
-                    </table>
+<div class="flex flex-1 max-w-max_width mx-auto w-full">
+<!-- Interactive SideNavBar Drawer -->
+<aside id="app-sidebar" class="fixed top-16 left-0 bottom-0 z-50 w-64 py-md px-sm flex flex-col gap-xs bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline transition-transform duration-300 ease-in-out -translate-x-full shadow-2xl overflow-y-auto">
+<div class="px-sm mb-md flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary">corporate_fare</span>
+</div>
+<div>
+<p class="font-title-md text-title-md font-bold text-on-surface leading-tight">ElSewedy Portal</p>
+<p class="font-label-md text-label-md text-secondary opacity-70">Knowledge Management</p>
+</div>
+</div>
+<button id="sidebar-close-btn" type="button" class="p-1 rounded-lg text-secondary hover:text-primary hover:bg-surface-variant transition-colors" title="Close Menu">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
+</div>
+<nav class="flex-1 flex flex-col gap-xs">
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-lg font-label-md text-label-md duration-200 ease-in-out transition-all" href="/">
+<span class="material-symbols-outlined">home</span>
+<span>Home</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-lg font-label-md text-label-md duration-200 ease-in-out transition-all" href="/user-news">
+<span class="material-symbols-outlined">newspaper</span>
+<span>News & Updates</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-lg font-label-md text-label-md duration-200 ease-in-out transition-all" href="/service-request">
+<span class="material-symbols-outlined">support_agent</span>
+<span>Service Requests</span>
+</a>
+<div class="my-xs border-t border-outline-variant"></div>
+<p class="px-sm font-label-md text-label-md text-secondary font-semibold uppercase tracking-wider">Admin</p>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-lg font-label-md text-label-md duration-200 ease-in-out transition-all" href="/admin/services">
+<span class="material-symbols-outlined">article</span>
+<span>Manage Articles</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-lg font-label-md text-label-md duration-200 ease-in-out transition-all" href="/admin/news">
+<span class="material-symbols-outlined">campaign</span>
+<span>Manage News</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-lg font-label-md text-label-md duration-200 ease-in-out transition-all bg-surface-variant" href="/admin/users">
+<span class="material-symbols-outlined">group</span>
+<span>Manage Users</span>
+</a>
+</nav>
+</aside>
 
-                    <p style="margin-top: 20px; color: #666666;">
-                        <strong>Total Users:</strong> <%= users.length %>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Main Content Area -->
+<main class="flex-1 p-md md:p-lg w-full">
+<div class="max-w-5xl mx-auto space-y-md">
+<div class="flex items-center justify-between pb-sm border-b border-outline-variant">
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">group</span>
+Registered Users
+</h1>
+<p class="text-secondary text-body-md mt-1">View and manage system user access</p>
+</div>
+<div class="bg-primary/10 text-primary font-bold px-4 py-2 rounded-xl text-sm border border-primary/20">
+Total Users: <%= users.length %>
+</div>
+</div>
+
+<div class="bg-surface dark:bg-surface-container border border-outline-variant dark:border-outline rounded-2xl shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant text-on-surface font-title-sm text-sm">
+<th class="py-4 px-6 font-semibold">User Email</th>
+<th class="py-4 px-6 font-semibold">Role</th>
+<th class="py-4 px-6 font-semibold">Joined Date</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant text-body-md text-on-surface-variant">
+<% users.forEach(u => { %>
+<tr class="hover:bg-surface-variant/50 transition-colors">
+<td class="py-4 px-6 font-medium text-on-surface flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">
+<%= u.email.charAt(0).toUpperCase() %>
+</div>
+<span><%= u.email %></span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide <%= u.role === 'admin' ? 'bg-primary text-on-primary' : 'bg-surface-variant text-on-surface-variant border border-outline-variant' %>">
+<%= u.role %>
+</span>
+</td>
+<td class="py-4 px-6 text-secondary text-sm">
+<%= u.createdAt ? new Date(u.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : 'N/A' %>
+</td>
+</tr>
+<% }); %>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+<footer class="bg-surface dark:bg-surface-container border-t border-outline-variant dark:border-outline mt-auto py-md text-center text-secondary text-sm">
+<div class="max-w-max_width mx-auto px-gutter flex flex-col sm:flex-row justify-between items-center gap-xs">
+<span class="font-label-md text-label-md text-secondary">© Elsewedy Development Employee Portal. Internal Use Only.</span>
+</div>
+</footer>
+
+<script>
+// Interactive Sidebar Toggle Logic
+const toggleBtn = document.getElementById('sidebar-toggle-btn');
+const closeBtn = document.getElementById('sidebar-close-btn');
+const sidebar = document.getElementById('app-sidebar');
+const backdrop = document.getElementById('sidebar-backdrop');
+
+if (sidebar) {
+  const openSidebar = () => {
+    sidebar.classList.remove('-translate-x-full');
+    sidebar.classList.add('translate-x-0');
+    if (backdrop) backdrop.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeSidebar = () => {
+    sidebar.classList.remove('translate-x-0');
+    sidebar.classList.add('-translate-x-full');
+    if (backdrop) backdrop.classList.add('hidden');
+    document.body.style.overflow = '';
+  };
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = sidebar.classList.contains('translate-x-0');
+      if (isOpen) closeSidebar();
+      else openSidebar();
+    });
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+  if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidebar.classList.contains('translate-x-0')) {
+      closeSidebar();
+    }
+  });
+
+  const navLinks = sidebar.querySelectorAll('a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', closeSidebar);
+  });
+}
+</script>
 </body>
 </html>

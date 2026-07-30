@@ -77,10 +77,15 @@
 <body class="bg-[#F5F6F8] text-on-surface font-body-lg min-h-screen flex flex-col">
 <header class="bg-surface border-b border-outline-variant sticky top-0 z-50">
 <div class="flex justify-between items-center px-gutter w-full h-16 max-w-max_width mx-auto">
+<div class="flex items-center gap-sm">
+<button id="sidebar-toggle-btn" type="button" class="p-2 -ml-2 rounded-lg text-on-surface hover:bg-surface-variant transition-colors flex items-center justify-center focus:outline-none cursor-pointer" aria-label="Toggle Navigation Menu" title="Toggle Sidebar">
+<span class="material-symbols-outlined text-2xl" data-icon="menu">menu</span>
+</button>
 <a href="/" class="flex items-center gap-sm cursor-pointer active:scale-95 transition-transform">
 <img src="https://elsewedydevelopment.com/wp-content/uploads/2023/04/SD-web-Logo.png" alt="Elsewedy Development" class="h-9 object-contain">
 <span class="font-headline-md text-headline-md font-bold text-primary hidden sm:inline"><%= newsItem ? 'Edit' : 'Create' %> News</span>
 </a>
+</div>
 <div class="flex items-center gap-sm">
 <a href="/admin/news" class="bg-primary text-on-primary px-sm py-xs rounded-lg font-title-md hover:bg-primary-container transition-all active:scale-95">Back</a>
 <a href="/logout" class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant flex items-center justify-center hover:bg-surface-variant transition-colors" title="Logout">
@@ -89,11 +94,20 @@
 </div>
 </div>
 </header>
+<!-- Sidebar Backdrop Overlay -->
+<div id="sidebar-backdrop" class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity duration-300 backdrop-blur-sm cursor-pointer"></div>
+
 <div class="flex flex-1 max-w-max_width mx-auto w-full">
-<aside class="hidden md:flex flex-col h-[calc(100vh-64px)] py-md px-sm gap-xs bg-surface-container-low border-r border-outline-variant w-64 sticky top-16">
-<div class="mb-lg px-2">
+<!-- Interactive SideNavBar Drawer -->
+<aside id="app-sidebar" class="fixed top-16 left-0 bottom-0 z-50 w-64 py-md px-sm flex flex-col gap-xs bg-surface-container-low border-r border-outline-variant transition-transform duration-300 ease-in-out -translate-x-full shadow-2xl overflow-y-auto">
+<div class="mb-lg px-2 flex items-center justify-between">
+<div>
 <h2 class="font-title-md text-title-md font-bold text-on-surface">CRM Admin</h2>
 <p class="font-label-md text-label-md text-secondary">Knowledge Management</p>
+</div>
+<button id="sidebar-close-btn" type="button" class="p-1 rounded-lg text-secondary hover:text-primary hover:bg-surface-variant transition-colors" title="Close Menu">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
 </div>
 <nav class="flex flex-col gap-1">
 <a class="flex items-center gap-sm px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all" href="/">
@@ -206,6 +220,51 @@
   document.querySelector('form')?.addEventListener('submit', () => {
     if (window.tinymce) tinymce.triggerSave();
   });
+
+  // Interactive Sidebar Toggle Logic
+  const toggleBtn = document.getElementById('sidebar-toggle-btn');
+  const closeBtn = document.getElementById('sidebar-close-btn');
+  const sidebar = document.getElementById('app-sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+
+  if (sidebar) {
+    const openSidebar = () => {
+      sidebar.classList.remove('-translate-x-full');
+      sidebar.classList.add('translate-x-0');
+      if (backdrop) backdrop.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeSidebar = () => {
+      sidebar.classList.remove('translate-x-0');
+      sidebar.classList.add('-translate-x-full');
+      if (backdrop) backdrop.classList.add('hidden');
+      document.body.style.overflow = '';
+    };
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = sidebar.classList.contains('translate-x-0');
+        if (isOpen) closeSidebar();
+        else openSidebar();
+      });
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+    if (backdrop) backdrop.addEventListener('click', closeSidebar);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sidebar.classList.contains('translate-x-0')) {
+        closeSidebar();
+      }
+    });
+
+    const navLinks = sidebar.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', closeSidebar);
+    });
+  }
 </script>
 </body>
 </html>
