@@ -143,7 +143,7 @@
 </a>
 <a class="flex items-center gap-sm px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200" href="/serviceReq">
 <span class="material-symbols-outlined">history</span>
-<span class="font-label-md text-label-md">Knowledge Base</span>
+<span class="font-label-md text-label-md">Employee book</span>
 </a>
 <a class="flex items-center gap-sm px-sm py-2 rounded-lg bg-secondary-container text-on-secondary-container font-semibold transition-all duration-200" href="/admin/services/new">
 <span class="material-symbols-outlined">add_note</span>
@@ -158,7 +158,7 @@
 <main class="flex-1 p-gutter max-w-5xl mx-auto w-full min-w-0">
 <header class="mb-lg">
 <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2"><%= service ? '✏️ Edit Article' : '✨ Create New Article' %></h1>
-<p class="font-body-md text-body-md text-secondary">Fill in the details below to add a new knowledge base article to the Oracle CRM Knowledge Base.</p>
+<p class="font-body-md text-body-md text-secondary">Fill in the details below to add a new employee book article to the Oracle CRM Employee book.</p>
 </header>
 <form class="space-y-md" id="article-form" method="POST" action="<%= service ? '/admin/services/' + service._id + '/edit' : '/admin/services' %>">
 <!-- Section 1: Title & Description -->

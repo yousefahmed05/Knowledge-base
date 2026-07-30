@@ -100,7 +100,7 @@
             },
         }
     }catch(_e){}</script>
-    <title><%= title || 'Knowledge Base' %> - Elsewedy Development</title>
+    <title><%= title || 'Employee book' %> - Elsewedy Development</title>
 </head>
 <body class="bg-background text-on-background font-body-lg min-h-screen flex flex-col overflow-x-hidden">
 <!-- TopNavBar Shell -->
@@ -110,7 +110,7 @@
 <a href="/" class="flex items-center gap-sm cursor-pointer active:scale-95 transition-transform">
 <img src="https://elsewedydevelopment.com/wp-content/uploads/2023/04/SD-web-Logo.png" alt="Elsewedy Development" class="h-9 object-contain">
 <span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim hidden sm:inline">
-    Knowledge Base
+  Employee book
 </span>
 </a>
 <nav class="hidden md:flex gap-sm items-center ml-lg">
@@ -141,7 +141,7 @@
 </a>
 <a class="flex items-center gap-sm px-sm py-2 bg-secondary-container text-on-secondary-container rounded-lg font-semibold transition-all duration-200 ease-in-out" href="/serviceReq">
 <span class="material-symbols-outlined">history</span>
-<span class="font-label-md text-label-md">Knowledge Base</span>
+<span class="font-label-md text-label-md">Employee book</span>
 </a>
 <a class="flex items-center gap-sm px-sm py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="/news">
 <span class="material-symbols-outlined">newspaper</span>
@@ -167,7 +167,7 @@
 <div class="mb-xl">
 <div class="flex justify-between items-center mb-lg">
 <div>
-<h1 class="font-headline-lg text-headline-lg text-on-background">Knowledge Base</h1>
+<h1 class="font-headline-lg text-headline-lg text-on-background">Employee book</h1>
 <p class="font-body-md text-body-md text-secondary mt-1">
 <%= services && services.length ? services.length : 0 %> article<%= services && services.length === 1 ? '' : 's' %>
 </p>
@@ -210,7 +210,7 @@ Recently updated
 <% } else { %>
 <div class="md:col-span-2 text-center py-lg">
 <span class="material-symbols-outlined text-[48px] text-secondary mx-auto mb-md opacity-50">description</span>
-<h3 class="font-title-lg text-title-lg text-on-surface">No knowledge articles available</h3>
+<h3 class="font-title-lg text-title-lg text-on-surface">No employee book articles available</h3>
 <p class="font-body-md text-body-md text-secondary">Articles will appear here once they are created.</p>
 </div>
 <% } %>
@@ -316,7 +316,7 @@ Recently updated
 </script>
 <!-- Footer Shell -->
 <footer class="bg-surface dark:bg-surface-container border-t border-outline-variant dark:border-outline mt-auto py-md text-center text-secondary text-sm">
-  © <%= currentYear %> Elsewedy Development Knowledge Base. All rights reserved.
+  © <%= currentYear %> Elsewedy Development Employee book. All rights reserved.
 </footer>
 </body>
 </html>

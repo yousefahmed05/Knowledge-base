@@ -21,7 +21,7 @@ router.get('/', requireAuth, async (req, res) => {
     }
 
     res.render('index', {
-        title: 'Home | Elsewedy Development',
+        title: 'Home | ElSewedy Development',
         destinations: destinations || [],
         newsItems: newsItems || [],
         user: req.user,
@@ -78,10 +78,10 @@ router.get('/serviceReq', requireAuth, async (req, res) => {
     }
 
     res.render('serviceReq', {
-        title: 'Knowledge Base | GlobalTours',
+        title: 'Employee book | GlobalTours',
         services: services || [],
         user: req.user,
-        activePage: 'knowledge-base'
+        activePage: 'employee-book'
     });
 });
 
@@ -98,7 +98,7 @@ router.get('/serviceReq/:slug', requireAuth, async (req, res) => {
             title: `${service.name} | GlobalTours`,
             service,
             user: req.user,
-            activePage: 'knowledge-base'
+            activePage: 'employee-book'
         });
     } catch (err) {
         console.error('Error fetching article details:', err);

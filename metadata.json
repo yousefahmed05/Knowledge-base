@@ -1,6 +1,6 @@
 {
-  "name": "Elsewedy Development Knowledge Base",
-  "description": "A Knowledge Base and News portal for Elsewedy Development.",
+  "name": "Elsewedy Development Employee book",
+  "description": "An Employee book and News portal for Elsewedy Development.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
