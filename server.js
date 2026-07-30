@@ -73,7 +73,7 @@ app.use(async (req, res, next) => {
     }
     next();
 });
-app.locals.siteName = 'GlobalTours';
+app.locals.siteName = 'Employee Book';
 app.locals.currentYear = new Date().getFullYear();
 
 const { stripHtml, isRichHtml, parseArticleDetails, getArticleBody } = require('./utils/articleDetails');

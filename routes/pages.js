@@ -55,7 +55,7 @@ router.get('/news/:id', requireAuth, async (req, res) => {
         }
 
         res.render('news-detail', {
-            title: `${newsItem.title} | GlobalTours`,
+            title: `${newsItem.title} | News`,
             newsItem,
             user: req.user,
             activePage: 'home'
@@ -78,7 +78,7 @@ router.get('/serviceReq', requireAuth, async (req, res) => {
     }
 
     res.render('serviceReq', {
-        title: 'Employee book | GlobalTours',
+        title: 'Employee book',
         services: services || [],
         user: req.user,
         activePage: 'employee-book'
@@ -95,7 +95,7 @@ router.get('/serviceReq/:slug', requireAuth, async (req, res) => {
         }
 
         res.render('article-detail', {
-            title: `${service.name} | GlobalTours`,
+            title: `${service.name}`,
             service,
             user: req.user,
             activePage: 'employee-book'
